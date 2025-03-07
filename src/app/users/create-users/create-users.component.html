@@ -1,0 +1,103 @@
+<div class="container mt-5">
+  <label style="color: red;">Last User Created {{lastUser}}</label>
+  <hr>
+
+  <h3 class="mb-4">User Details</h3>
+
+  <div class="row mb-3">
+    <div class="col-md-6">
+      <label for="source" class="form-label">Source</label>
+      <select id="source" class="form-control" [(ngModel)]="source" (change)="changeSourceValue($event)">
+        <option [value]="source" *ngFor="let source of sourceList">{{source}}</option>
+      </select>
+
+    </div>
+  </div>
+
+
+  <form [formGroup]="detailsForm" (ngSubmit)="onSubmit()">
+    <div class="row mb-3">
+      <div class="col-md-6">
+        <label for="aliasName" class="form-label">Alias Name</label>
+        <input type="text" id="aliasName" class="form-control" formControlName="aliasName"
+          placeholder="Enter alias name">
+      </div>
+      <div class="col-md-6">
+        <label for="businessName" class="form-label">Name</label>
+        <input type="text" id="businessName" class="form-control" formControlName="name"
+          placeholder="Enter business name">
+      </div>
+    </div>
+
+    <div class="row mb-3">
+      <div class="col-md-6">
+        <label for="address" class="form-label">Address</label>
+        <textarea id="address" class="form-control" formControlName="address" placeholder="Enter address"></textarea>
+      </div>
+      <div class="col-md-6">
+        <label for="city" class="form-label">City</label>
+        <input type="text" id="city" class="form-control" formControlName="city" placeholder="Enter city">
+      </div>
+    </div>
+
+    <div class="row mb-3">
+      <div class="col-md-6">
+        <label for="state" class="form-label">State</label>
+        <select id="states" class="form-control" formControlName="state">
+          <option [value]="state" *ngFor="let state of stateList">{{state}}</option>
+        </select>
+
+      </div>
+      <div class="col-md-6">
+        <label for="pincode" class="form-label">Pincode</label>
+        <input type="number" id="pincode" class="form-control" formControlName="pincode" placeholder="Enter pincode">
+      </div>
+    </div>
+
+    <div class="row mb-3">
+      <div class="col-md-6">
+        <label for="phone" class="form-label">Phone</label>
+        <input type="number" id="phone" class="form-control" formControlName="phone" placeholder="Enter phone number">
+      </div>
+      <div class="col-md-6">
+        <label for="countryCode" class="form-label">Country Code</label>
+        <input type="number" id="countryCode" class="form-control" formControlName="countryCode"
+          placeholder="Enter country code">
+      </div>
+    </div>
+
+    <div class="row mb-3">
+      <div class="col-md-6">
+        <label for="country" class="form-label">Country</label>
+        <select id="states" class="form-control" formControlName="country">
+          <option [value]="country" *ngFor="let country of countryList">{{country}}</option>
+        </select>
+
+      </div>
+
+      <div class="col-md-6">
+        <label for="email" class="form-label">Email</label>
+        <input type="email" id="email" class="form-control" formControlName="email" placeholder="Enter email">
+      </div>
+    </div>
+
+    <div class="row mb-3">
+      <div class="col-md-6 d-none">
+        <label for="code" class="form-label">Code</label>
+        <input type="text" id="code" class="form-control" formControlName="code" placeholder="Enter code">
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col text-end">
+        <button type="reset" class="btn btn-secondary me-2" (click)="reset()">Reset</button>
+        <button type="submit" class="btn btn-primary" [disabled]="detailsForm.invalid">Submit</button>
+      </div>
+    </div>
+  </form>
+
+  <div *ngIf="formSubmitted" class="mt-4">
+    <h5>Form Data:</h5>
+    <pre>{{ detailsForm.value | json }}</pre>
+  </div>
+</div>

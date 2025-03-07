@@ -1,0 +1,17 @@
+<div class="container">
+    <h2>YANG Validator</h2>
+
+    <textarea [(ngModel)]="yangCode" rows="10" class="form-control" placeholder="Paste YANG code here"></textarea>
+
+    <button (click)="validateYang()" class="btn btn-primary mt-3">Validate</button>
+    <button (click)="reset()" class="btn btn-danger mt-3" style="margin-left: 20px !important;">Reset</button>
+
+    <div *ngIf="validated && validationErrors.length" class="mt-3 alert alert-danger">
+        <h4>Validation Errors:</h4>
+        <ul>
+            <li *ngFor="let error of validationErrors">{{ error }}</li>
+
+        </ul>
+    </div>
+    <div *ngIf="validated &&  validationErrors.length==0" class="mt-3 alert alert-success">YANG is Valid</div>
+</div>

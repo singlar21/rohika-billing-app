@@ -1,0 +1,28 @@
+<div class="container mt-4">
+    <h2 class="mb-3">Users List</h2>
+    <table class="table table-bordered table-striped">
+      <thead class="table-dark">
+        <tr>
+          <th>ID</th>
+          <th>Category</th>
+          <th>Barcode</th>
+          <th>Name</th>
+          <th>Description</th>
+          <th>Price</th>
+          <th>Created At</th>
+        </tr>
+      </thead>
+      <tbody *ngIf="users.length>0">
+        <tr *ngFor="let user of users">
+          <td>{{ user.id }}</td>
+          <td>{{ user.category }}</td>
+          <td>{{ user.invockBarCode }}</td>
+          <td>{{ user.name }}</td>
+          <td>{{ user.description }}</td>
+          <td>{{ user.price | currency: 'INR' }}</td>
+          <td>{{ user.createdAt }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  

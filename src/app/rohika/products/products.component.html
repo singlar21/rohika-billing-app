@@ -1,0 +1,28 @@
+<div class="container mt-4">
+    <h2 class="mb-3">Product List</h2>
+    <table class="table table-bordered table-striped">
+      <thead class="table-dark">
+        <tr>
+          <th>ID</th>
+          <th>Category</th>
+          <th>Barcode</th>
+          <th>Name</th>
+          <th>Description</th>
+          <th>Price</th>
+          <th>Created At</th>
+        </tr>
+      </thead>
+      <tbody *ngIf="products.length>0">
+        <tr *ngFor="let product of products">
+          <td>{{ product.id }}</td>
+          <td>{{ product.category }}</td>
+          <td>{{ product.invockBarCode }}</td>
+          <td>{{ product.name }}</td>
+          <td>{{ product.description }}</td>
+          <td>{{ product.price | currency: 'INR' }}</td>
+          <td>{{ product.createdAt }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  
