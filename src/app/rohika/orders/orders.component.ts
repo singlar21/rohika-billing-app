@@ -13,6 +13,8 @@ export class OrdersComponent {
   @Input()
   itemsList:any[]=[];
 
-
+  get totalAmount(): number {
+    return this.itemsList.reduce((sum, item) => sum + item.unitPrice, 0);
+  }
 
 }
