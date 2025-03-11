@@ -9,7 +9,7 @@ import { RohikaUsersComponent } from './rohika/rohika-users/rohika-users.compone
 
 export const routes: Routes = [
 
-    { path: '', component: JsonFormatterComponent },
+    { path: '', component: RohikaUsersComponent },
     // { path: 'createUser', component: CreateUsersComponent },
     // { path: 'compare', component: JsonFormatterComponent },
     // { path: 'beautifier', component: JsonBeautifierComponent },

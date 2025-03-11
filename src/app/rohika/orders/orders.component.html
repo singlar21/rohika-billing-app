@@ -1,0 +1,35 @@
+<div class="container mt-4">
+    <div class="row" *ngIf="itemsList.length > 0">
+        <label>Bill Amount:: {{itemsList[0].billAmount}}</label>
+        <label>Tax Amount:: {{itemsList[0].taxAmount}}</label>
+        
+    </div>
+
+    <table class="table table-bordered table-striped">
+      <thead class="table-dark">
+        <tr>
+          <!-- <th>ID</th>
+          <th>User ID</th>
+          <th>Bill Amount</th>
+          <th>Tax Amount</th> -->
+          <th>Quantity</th>
+          <th>Unit Price</th>
+          <th>Invoice ID</th>
+          <th>Product</th>
+        </tr>
+      </thead>
+      <tbody *ngIf="itemsList.length > 0">
+        <tr *ngFor="let item of itemsList">
+          <!-- <td>{{ item.id }}</td>
+          <td>{{ item.userId }}</td>
+          <td>{{ item.billAmount | currency: 'INR' }}</td>
+          <td>{{ item.taxAmount | currency: 'INR' }}</td> -->
+          <td>{{ item.quantity }}</td>
+          <td>{{ item.unitPrice | currency: 'INR' }}</td>
+          <td>{{ item.invoiceId }}</td>
+          <td>{{ item.name }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  

@@ -2,18 +2,21 @@ import { Component } from '@angular/core';
 import { UsersService } from '../../users/create-users/users.service';
 import { RohikaUsersService } from '../services/rohika-users.service';
 import { CommonModule, CurrencyPipe } from '@angular/common';
+import { OrdersComponent } from "../orders/orders.component";
+import { ItemsService } from '../services/items.service';
 
 @Component({
   selector: 'app-rohika-users',
   standalone: true,
-  imports: [CurrencyPipe,CommonModule],
+  imports: [CommonModule, OrdersComponent],
   templateUrl: './rohika-users.component.html',
   styleUrl: './rohika-users.component.less'
 })
 export class RohikaUsersComponent {
   users:any[]=[];
+  itemList:any[]=[];
 
-  constructor(private userService:RohikaUsersService) {
+  constructor(private userService:RohikaUsersService,private itemService:ItemsService) {
     
   }
 
@@ -30,6 +33,19 @@ export class RohikaUsersComponent {
       },
       error: (error) => {
         console.error('Error creating user', error);
+      }
+    });
+  }
+
+  getItemsListByUser(id:number) {
+    this.itemService.getItemsByUserId(id).subscribe({
+      next: (response) => {
+        console.log('', response);
+        this.itemList = response;
+        // Handle success, such as showing a success message
+      },
+      error: (error) => {
+        console.error('Error creating items', error);
       }
     });
   }
