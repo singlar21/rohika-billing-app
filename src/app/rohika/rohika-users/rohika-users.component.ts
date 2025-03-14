@@ -4,6 +4,7 @@ import { RohikaUsersService } from '../services/rohika-users.service';
 import { CommonModule, CurrencyPipe } from '@angular/common';
 import { OrdersComponent } from "../orders/orders.component";
 import { ItemsService } from '../services/items.service';
+import { NotificationService } from '../../core/notification/notification.service';
 
 @Component({
   selector: 'app-rohika-users',
@@ -16,7 +17,7 @@ export class RohikaUsersComponent {
   users:any[]=[];
   itemList:any[]=[];
 
-  constructor(private userService:RohikaUsersService,private itemService:ItemsService) {
+  constructor(private userService:RohikaUsersService,private itemService:ItemsService,private notificationService: NotificationService) {
     
   }
 
@@ -40,12 +41,22 @@ export class RohikaUsersComponent {
   getItemsListByUser(id:number) {
     this.itemService.getItemsByUserId(id).subscribe({
       next: (response) => {
-        console.log('', response);
         this.itemList = response;
-        // Handle success, such as showing a success message
       },
       error: (error) => {
         console.error('Error creating items', error);
+      }
+    });
+  }
+
+  deleteUser(id:number) {
+    this.itemService.deleteUser(id).subscribe({
+      next: (response) => {
+        this.notificationService.showSuccess("User Deleted Successfully");
+        this.getUserList();
+      },
+      error: (error) => {
+        console.error('Error Delete User', error);
       }
     });
   }

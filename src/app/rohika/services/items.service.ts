@@ -13,4 +13,11 @@ export class ItemsService {
         // let url = "http://localhost:8080/users/list"
     return this.http.get<any>(url);
   }
+
+  deleteUser(userId:number) {
+    // let url = "https://rohikastore-5826a7d1db3c.herokuapp.com/users/deleteUser/"+userId;
+    let url = "http://localhost:8080/users/delete/"+userId;
+    return this.http.delete<any>(url,{ responseType: 'text' as 'json' });
+  }
+
 }

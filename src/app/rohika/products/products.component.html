@@ -3,7 +3,7 @@
     <table class="table table-bordered table-striped">
       <thead class="table-dark">
         <tr>
-          <th>ID</th>
+          <!-- <th>ID</th> -->
           <th>Category</th>
           <th>Barcode</th>
           <th>Name</th>
@@ -14,13 +14,13 @@
       </thead>
       <tbody *ngIf="products.length>0">
         <tr *ngFor="let product of products">
-          <td>{{ product.id }}</td>
+          <!-- <td>{{ product.id }}</td> -->
           <td>{{ product.category }}</td>
           <td>{{ product.invockBarCode }}</td>
           <td>{{ product.name }}</td>
           <td>{{ product.description }}</td>
           <td>{{ product.price | currency: 'INR' }}</td>
-          <td>{{ product.createdAt }}</td>
+          <td>{{ product.createdAt | date }} </td>
         </tr>
       </tbody>
     </table>

@@ -19,7 +19,7 @@
           <th>Pincode</th>
           <th>User Type</th>
           <th>Created At</th>
-          <th>Order Details</th>
+          <th>Options</th>
         </tr>
       </thead>
       <tbody *ngIf="users.length > 0">
@@ -36,12 +36,15 @@
           <td>{{ user.country }}</td>
           <td>{{ user.pincode }}</td>
           <td>{{ user.userType }}</td>
-          <td>{{ user.createdAt }}</td>
+          <td>{{ user.createdAt | date }}</td>
           <td>
-            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#myModal" 
-                    (click)="getItemsListByUser(user.id)">
-              Orders
-            </button>
+            <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#myModal" 
+            (click)="getItemsListByUser(user.id)">
+              <i class="bi bi-clipboard"></i>
+          </button>
+            <button class="btn btn-primary" (click)="deleteUser(user.id)">
+              <i class="bi bi-trash"></i>
+          </button>
           </td>
         </tr>
       </tbody>
