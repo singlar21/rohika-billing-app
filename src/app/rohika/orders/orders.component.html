@@ -1,7 +1,7 @@
 <div class="container mt-4">
-    
+  <div class="table-responsive" style="max-height: 300px; overflow-y: auto;">
     <table class="table table-bordered table-striped">
-      <thead class="table-dark">
+      <thead class="table-dark position-sticky top-0">
         <tr>
           <th>Product</th>
           <th>Quantity</th>
@@ -13,21 +13,19 @@
           <td>{{ item.name }}</td>
           <td>{{ item.quantity }}</td>
           <td>{{ item.unitPrice | currency: 'INR' }}</td>
-          
         </tr>
         <tr>
-            <td>Total::</td>
-            <td></td>
-            <td>{{ totalAmount | currency: 'INR' }}</td>
+          <td>Total::</td>
+          <td></td>
+          <td>{{ totalAmount | currency: 'INR' }}</td>
         </tr>
       </tbody>
     </table>
-    <div class="row col-md-5" *ngIf="itemsList.length > 0" style="float: right;">
-        <label>Tax Amount:: {{itemsList[0].taxAmount}}</label>   
-        <br>
-        <label>Bill Amount:: {{itemsList[0].billAmount}}</label>
-     
-    </div>
-
   </div>
-  
+
+  <div class="row col-md-5" *ngIf="itemsList.length > 0" style="float: right;">
+    <label>Tax Amount:: {{itemsList[0].taxAmount}}</label>   
+    <br>
+    <label>Bill Amount:: {{itemsList[0].billAmount}}</label>
+  </div>
+</div>

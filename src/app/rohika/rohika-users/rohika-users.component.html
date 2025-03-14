@@ -1,54 +1,60 @@
 <div class="container mt-4">
   <h2 class="mb-3">Users List</h2>
-  <table class="table table-bordered table-striped">
-    <thead class="table-dark">
-      <tr>
-        <th>ID</th>
-        <th>Name</th>
-        <th>Alias Name</th>
-        <th>Email</th>
-        <th>Phone</th>
-        <th>Country Code</th>
-        <th>Address</th>
-        <th>City</th>
-        <th>State</th>
-        <th>Country</th>
-        <th>Pincode</th>
-        <th>User Type</th>
-        <th>Created At</th>
-        <th>Order Details</th>
-      </tr>
-    </thead>
-    <tbody *ngIf="users.length > 0">
-      <tr *ngFor="let user of users">
-        <td>{{ user.id }}</td>
-        <td>{{ user.name }}</td>
-        <td>{{ user.aliasName }}</td>
-        <td>{{ user.email }}</td>
-        <td>{{ user.phone }}</td>
-        <td>+{{ user.countryCode }}</td>
-        <td>{{ user.address }}</td>
-        <td>{{ user.city }}</td>
-        <td>{{ user.state }}</td>
-        <td>{{ user.country }}</td>
-        <td>{{ user.pincode }}</td>
-        <td>{{ user.userType }}</td>
-        <td>{{ user.createdAt }}</td>
-        <td><button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#myModal" (click)="getItemsListByUser(user.id)">
-          Show Order Details
-        </button></td>
-      </tr>
-    </tbody>
-  </table>
-</div>
 
+  <!-- Full-Screen Scrollable Table Container -->
+  <div class="table-responsive" style="max-height: 80vh; overflow-y: auto;">
+    <table class="table table-bordered table-striped">
+      <thead class="table-dark position-sticky top-0">
+        <tr>
+          <!-- <th>ID</th> -->
+          <th>Name</th>
+          <th>Alias Name</th>
+          <th>Email</th>
+          <th>Phone</th>
+          <!-- <th>Country Code</th> -->
+          <th>Address</th>
+          <th>City</th>
+          <th>State</th>
+          <th>Country</th>
+          <th>Pincode</th>
+          <th>User Type</th>
+          <th>Created At</th>
+          <th>Order Details</th>
+        </tr>
+      </thead>
+      <tbody *ngIf="users.length > 0">
+        <tr *ngFor="let user of users">
+          <!-- <td>{{ user.id }}</td> -->
+          <td>{{ user.name }}</td>
+          <td>{{ user.aliasName }}</td>
+          <td>{{ user.email }}</td>
+          <td>{{ user.phone }}</td>
+          <!-- <td>+{{ user.countryCode }}</td> -->
+          <td>{{ user.address }}</td>
+          <td>{{ user.city }}</td>
+          <td>{{ user.state }}</td>
+          <td>{{ user.country }}</td>
+          <td>{{ user.pincode }}</td>
+          <td>{{ user.userType }}</td>
+          <td>{{ user.createdAt }}</td>
+          <td>
+            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#myModal" 
+                    (click)="getItemsListByUser(user.id)">
+              Orders
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
 
 <!-- Bootstrap Modal -->
 <div class="modal fade" id="myModal" tabindex="-1" aria-labelledby="modalTitle" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="modalTitle">Products Orderd by User</h5>
+        <h5 class="modal-title" id="modalTitle">Products Ordered by User</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
