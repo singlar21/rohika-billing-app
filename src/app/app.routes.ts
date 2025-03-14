@@ -5,7 +5,7 @@ import { RohikaUsersComponent } from './components/rohika-users/rohika-users.com
 export const routes: Routes = [
 
     { path: '', component: RohikaUsersComponent },
-    { path: 'orders', component: ProductsComponent },
-    { path: 'users', component: RohikaUsersComponent },
+    { path: 'products', component: ProductsComponent },
+    { path: 'orders', component: RohikaUsersComponent },
 
 ];

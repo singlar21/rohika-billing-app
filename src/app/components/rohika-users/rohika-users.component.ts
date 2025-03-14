@@ -5,17 +5,21 @@ import { CommonModule, CurrencyPipe } from '@angular/common';
 import { OrdersComponent } from "../orders/orders.component";
 import { ItemsService } from '../services/items.service';
 import { NotificationService } from '../../core/notification/notification.service';
+import { TableSearchPipe } from '../../core/pipes/table-search.pipe';
+import { FormsModule, NgModel } from '@angular/forms';
 
 @Component({
   selector: 'app-rohika-users',
   standalone: true,
-  imports: [CommonModule, OrdersComponent],
+  imports: [CommonModule, OrdersComponent,TableSearchPipe,FormsModule],
   templateUrl: './rohika-users.component.html',
   styleUrl: './rohika-users.component.less'
 })
 export class RohikaUsersComponent {
   users:any[]=[];
   itemList:any[]=[];
+
+  searchText:string='';
 
   constructor(private userService:RohikaUsersService,private itemService:ItemsService,private notificationService: NotificationService) {
     

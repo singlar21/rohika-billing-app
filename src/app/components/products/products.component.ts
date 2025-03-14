@@ -1,17 +1,20 @@
 import { Component } from '@angular/core';
 import { ProductService } from '../services/product.service';
-import { AsyncPipe, CommonModule, CurrencyPipe } from '@angular/common';
+import { CommonModule, CurrencyPipe } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+import { TableSearchPipe } from '../../core/pipes/table-search.pipe';
 
 @Component({
   selector: 'app-products',
   standalone: true,
-  imports: [CurrencyPipe,AsyncPipe,CommonModule],
+  imports: [CurrencyPipe,CommonModule,FormsModule,TableSearchPipe],
   templateUrl: './products.component.html',
   styleUrl: './products.component.less'
 })
 export class ProductsComponent {
 
   products:any[]=[];
+  searchText:string='';
 
   constructor(private productService:ProductService) {
     

@@ -1,43 +1,41 @@
 <div class="container mt-4">
   <h2 class="mb-3">Orders</h2>
 
-  <div class="table-responsive" style="max-height: 80vh; overflow-y: auto;">
+  <input type="text" class="form-control mb-3" [(ngModel)]="searchText" placeholder="Search...">
+
+  <div class="table-responsive" style="max-height: 75vh; overflow-y: auto;">
     <table class="table table-bordered table-striped">
       <thead class="table-dark position-sticky top-0">
         <tr>
           <th>Name</th>
-          <th>Alias Name</th>
-          <th>Email</th>
+          <!-- <th>Email</th> -->
           <th>Phone</th>
           <th>Address</th>
           <th>City</th>
           <th>State</th>
           <th>Country</th>
           <th>Pincode</th>
-          <th>User Type</th>
           <th>Created At</th>
           <th>Options</th>
         </tr>
       </thead>
       <tbody *ngIf="users.length > 0">
-        <tr *ngFor="let user of users">
+        <tr *ngFor="let user of users | tableSearch: searchText">
           <td>{{ user.name }}</td>
-          <td>{{ user.aliasName }}</td>
-          <td>{{ user.email }}</td>
+          <!-- <td>{{ user.email }}</td> -->
           <td>{{ user.phone }}</td>
           <td>{{ user.address }}</td>
           <td>{{ user.city }}</td>
           <td>{{ user.state }}</td>
           <td>{{ user.country }}</td>
           <td>{{ user.pincode }}</td>
-          <td>{{ user.userType }}</td>
           <td>{{ user.createdAt | date }}</td>
-          <td>
+          <td style="display: inline-flex;">
             <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#myModal" 
             (click)="getItemsListByUser(user.id)">
               <i class="bi bi-clipboard"></i>
           </button>
-            <button class="btn btn-primary" (click)="deleteUser(user.id)">
+            <button class="btn btn-primary" (click)="deleteUser(user.id)" style="margin-left: 5px;">
               <i class="bi bi-trash"></i>
           </button>
           </td>

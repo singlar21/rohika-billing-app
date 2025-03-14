@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { RouterLink, RouterModule, RouterOutlet } from '@angular/router';
 import { VisitService } from './visitors/services/visit.service';
 import { NotificationComponent } from './core/notification/notification.component';
-import { ProductsComponent } from "./components/products/products.component";
 
 @Component({
   selector: 'app-root',
