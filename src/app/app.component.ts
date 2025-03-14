@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { RouterLink, RouterModule, RouterOutlet } from '@angular/router';
-import { VisitService } from './json-bhai/services/visit.service';
+import { VisitService } from './visitors/services/visit.service';
 import { NotificationComponent } from './core/notification/notification.component';
-import { ProductsComponent } from "./rohika/products/products.component";
+import { ProductsComponent } from "./components/products/products.component";
 
 @Component({
   selector: 'app-root',

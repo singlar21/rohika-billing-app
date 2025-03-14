@@ -1,17 +1,14 @@
 <div class="container mt-4">
-  <h2 class="mb-3">Users List</h2>
+  <h2 class="mb-3">Orders</h2>
 
-  <!-- Full-Screen Scrollable Table Container -->
   <div class="table-responsive" style="max-height: 80vh; overflow-y: auto;">
     <table class="table table-bordered table-striped">
       <thead class="table-dark position-sticky top-0">
         <tr>
-          <!-- <th>ID</th> -->
           <th>Name</th>
           <th>Alias Name</th>
           <th>Email</th>
           <th>Phone</th>
-          <!-- <th>Country Code</th> -->
           <th>Address</th>
           <th>City</th>
           <th>State</th>
@@ -24,12 +21,10 @@
       </thead>
       <tbody *ngIf="users.length > 0">
         <tr *ngFor="let user of users">
-          <!-- <td>{{ user.id }}</td> -->
           <td>{{ user.name }}</td>
           <td>{{ user.aliasName }}</td>
           <td>{{ user.email }}</td>
           <td>{{ user.phone }}</td>
-          <!-- <td>+{{ user.countryCode }}</td> -->
           <td>{{ user.address }}</td>
           <td>{{ user.city }}</td>
           <td>{{ user.state }}</td>
