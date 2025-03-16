@@ -7,11 +7,12 @@ import { ItemsService } from '../services/items.service';
 import { NotificationService } from '../../core/notification/notification.service';
 import { TableSearchPipe } from '../../core/pipes/table-search.pipe';
 import { FormsModule, NgModel } from '@angular/forms';
+import { BillingComponent } from "../billing/billing.component";
 
 @Component({
   selector: 'app-rohika-users',
   standalone: true,
-  imports: [CommonModule, OrdersComponent,TableSearchPipe,FormsModule],
+  imports: [CommonModule, OrdersComponent, TableSearchPipe, FormsModule, BillingComponent],
   templateUrl: './rohika-users.component.html',
   styleUrl: './rohika-users.component.less'
 })
@@ -19,7 +20,11 @@ export class RohikaUsersComponent {
   users:any[]=[];
   itemList:any[]=[];
 
+  selectedUser:any;
+
   searchText:string='';
+
+  openPrintDialog:boolean = false;
 
   constructor(private userService:RohikaUsersService,private itemService:ItemsService,private notificationService: NotificationService) {
     
@@ -45,6 +50,7 @@ export class RohikaUsersComponent {
   getItemsListByUser(id:number) {
     this.itemService.getItemsByUserId(id).subscribe({
       next: (response) => {
+        this.openPrintDialog = true;
         this.itemList = response;
       },
       error: (error) => {
@@ -63,5 +69,25 @@ export class RohikaUsersComponent {
         console.error('Error Delete User', error);
       }
     });
+  }
+
+  setUser(user:any) {
+    console.error(user);
+    this.getItemsListByUser(user.id);
+    
+    this.selectedUser = user;
+  }
+
+  printWindow() {
+    // window.print();  // Simple method to trigger browser print
+          let divContentArea = document.getElementById('printArea');
+          if(divContentArea) {
+            let divContent = divContentArea.innerHTML;
+            var originalContent = document.body.innerHTML;
+
+            document.body.innerHTML = divContent;
+            window.print();
+            document.body.innerHTML = originalContent;
+          }
   }
 }

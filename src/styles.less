@@ -14,3 +14,11 @@
 .table-dark {
     --bs-table-bg: blueviolet !important;
 }
+
+@media print {
+    /* Hide elements you don't want to print */
+    .address-section, .extra-info {
+        display: none !important;
+    }
+    
+}

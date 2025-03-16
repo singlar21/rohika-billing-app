@@ -1,0 +1,77 @@
+<div class="invoice-container">
+    <div class="header">M/S ROHIKA</div>
+    <p class="company-info">C/O M/s Rohika Near Kaplash Nursing Home, Bus Stand Road, Dhuri, Punjab, India<br></p>
+
+    <p class="contact-info">
+        <label>GSTIN: 03AIVPR2995N1Z7</label>
+        <label>Phone: 6280926290</label>
+        <label>Email: {{"rohikacreations@gmail.com"}}</label>
+    </p>
+
+    <hr style="opacity: 1;font-weight: bold;">
+
+    <div class="row">
+        <div class="col-3">
+            <strong>Bill To:  {{billData.name}}</strong><br>
+            {{billData.address}}
+        </div>
+        <div class="col-6">
+        </div>
+        <div class="col-3">
+            Date: {{billData.createdAt | date:'dd-MM-yyyy'}}
+            <br>
+            <br>
+            <strong>Ship To:</strong><br>
+            {{billData.address}}
+        </div>
+    </div>
+
+
+    <table class="items">
+        <thead>
+            <tr>
+                <th>Sr.</th>
+                <th>Item Name</th>
+                <th>Qty</th>
+                <th>Price</th>
+                <th>Unit</th>
+                <th>Amount</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let item of itemsList;let i=index">
+                <td>{{ i+1 }}</td>
+                <td>{{ item.name }}</td>
+                <td>{{ item.quantity }}</td>
+                <td>{{ item.unitPrice | currency: 'INR' }}</td>
+                <td>pcs</td>
+                <td>{{ item.unitPrice | currency: 'INR' }}</td>
+            </tr>
+            <tr>
+                <td colspan="5"><strong>Total:</strong></td>
+                <td>{{ totalAmount | currency: 'INR' }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div style="float: left;margin-top:30px">
+        Amount: {{itemsList[0].billAmount | numberToWords}}
+    </div>
+
+    <table class="summary" style="margin-top:30px;float: right;">
+        <tbody>
+            <tr>
+                <td style="width: 55%;">Total Tax Amount</td>
+                <td  style="width: 45%;">{{itemsList[0].taxAmount | currency: 'INR'}}</td>
+            </tr>
+            <tr>
+                <td>Discount Amount</td>
+                <td>{{itemsList[0].discountAmount | currency: 'INR'}}</td>
+            </tr>
+            <tr>
+                <td>Total Amount</td>
+                <td>{{itemsList[0].billAmount | currency: 'INR'}}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
