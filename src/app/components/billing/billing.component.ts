@@ -3,11 +3,12 @@ import { BillingService } from '../services/billing.service';
 import { FormsModule } from '@angular/forms';
 import { CommonModule, CurrencyPipe, NgIf } from '@angular/common';
 import { NumberToWordsPipe } from '../../core/pipes/number-to-words.pipe';
+import { PackagingComponent } from "../packaging/packaging.component";
 
 @Component({
   selector: 'app-billing',
   standalone: true,
-  imports: [FormsModule,CurrencyPipe,CommonModule,NumberToWordsPipe],
+  imports: [FormsModule, CurrencyPipe, CommonModule, NumberToWordsPipe, PackagingComponent],
   templateUrl: './billing.component.html',
   styleUrl: './billing.component.less'
 })

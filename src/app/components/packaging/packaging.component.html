@@ -1,0 +1,48 @@
+<div class="packing-slip">
+    <div class="header">Packing Slip</div>
+
+    <div class="row">
+        <div class="col-3">
+            <strong>From: </strong><br>
+            Rohika
+            <br>
+            H.No 10A/202 Near kakkar wall Pull Dhuri
+            148024 Dhuri PB
+            India
+        </div>
+        <div class="col-6">
+        </div>
+        <div class="col-3">
+            Date: {{billData.createdAt | date:'dd-MM-yyyy'}}
+            <br>
+            <br>
+            <strong>Ship To:</strong>{{billData.name}}<br>
+            {{billData.address}},
+            {{ billData.city }},
+            {{ billData.state }},
+            {{ billData.country }},
+            {{ billData.pincode }}
+            <br>
+            {{billData.phone}}
+        </div>
+    </div>
+
+
+    <div class="section-title">Order Details:</div>
+    <table class="order-items">
+        <thead>
+            <tr>
+                <th>Qty</th>
+                <th>Item</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let item of itemsList;let i=index">
+                <td>{{ item.quantity }}</td>
+                <td>{{ item.name }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div class="footer">Rohika™</div>
+</div>
