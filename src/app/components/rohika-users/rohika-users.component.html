@@ -8,7 +8,7 @@
       <thead class="table-dark position-sticky top-0">
         <tr>
           <th>Name</th>
-          <!-- <th>Email</th> -->
+          <th>Shopify Order No.</th>
           <th>Phone</th>
           <th>Address</th>
           <th>City</th>
@@ -22,7 +22,7 @@
       <tbody *ngIf="users.length > 0">
         <tr *ngFor="let user of users | tableSearch: searchText">
           <td>{{ user.name }}</td>
-          <!-- <td>{{ user.email }}</td> -->
+          <td>{{ user.aliasName }}</td>
           <td>{{ user.phone }}</td>
           <td>{{ user.address }}</td>
           <td>{{ user.city }}</td>
