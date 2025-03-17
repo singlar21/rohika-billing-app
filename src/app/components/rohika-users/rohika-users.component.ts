@@ -1,12 +1,11 @@
 import { Component } from '@angular/core';
-import { UsersService } from '../../users/create-users/users.service';
 import { RohikaUsersService } from '../services/rohika-users.service';
-import { CommonModule, CurrencyPipe } from '@angular/common';
+import { CommonModule } from '@angular/common';
 import { OrdersComponent } from "../orders/orders.component";
 import { ItemsService } from '../services/items.service';
 import { NotificationService } from '../../core/notification/notification.service';
 import { TableSearchPipe } from '../../core/pipes/table-search.pipe';
-import { FormsModule, NgModel } from '@angular/forms';
+import { FormsModule } from '@angular/forms';
 import { BillingComponent } from "../billing/billing.component";
 
 @Component({
@@ -47,10 +46,12 @@ export class RohikaUsersComponent {
     });
   }
 
-  getItemsListByUser(id:number) {
+  getItemsListByUser(id:number,fromUsers?:boolean) {
     this.itemService.getItemsByUserId(id).subscribe({
       next: (response) => {
-        this.openPrintDialog = true;
+        if(fromUsers) {
+          this.openPrintDialog = true;
+        }
         this.itemList = response;
       },
       error: (error) => {
@@ -73,7 +74,7 @@ export class RohikaUsersComponent {
 
   setUser(user:any) {
     console.error(user);
-    this.getItemsListByUser(user.id);
+    this.getItemsListByUser(user.id,true);
     
     this.selectedUser = user;
   }

@@ -22,7 +22,7 @@
       <tbody *ngIf="users.length > 0">
         <tr *ngFor="let user of users | tableSearch: searchText">
           <td>{{ user.name }}</td>
-          <td>{{ user.aliasName }}</td>
+          <td>#JBR{{ user.aliasName }}</td>
           <td>{{ user.phone }}</td>
           <td>{{ user.address }}</td>
           <td>{{ user.city }}</td>
@@ -33,11 +33,11 @@
           <td style="display: inline-flex;">
             <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#myModal" 
             (click)="getItemsListByUser(user.id)">
-              <i class="bi bi-clipboard"></i>
+              <i class="bi bi-info-circle"></i>
           </button>
-            <button class="btn btn-primary" (click)="deleteUser(user.id)" style="margin-left: 5px;">
+            <!-- <button class="btn btn-primary" (click)="deleteUser(user.id)" style="margin-left: 5px;">
               <i class="bi bi-trash"></i>
-          </button>
+          </button> -->
           <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#printModal" 
           (click)="setUser(user)"  style="margin-left: 5px;">
             <i class="bi bi-printer"></i>
