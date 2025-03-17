@@ -7,11 +7,13 @@ import { NotificationService } from '../../core/notification/notification.servic
 import { TableSearchPipe } from '../../core/pipes/table-search.pipe';
 import { FormsModule } from '@angular/forms';
 import { BillingComponent } from "../billing/billing.component";
+import { NgxPrintModule } from 'ngx-print';
+
 
 @Component({
   selector: 'app-rohika-users',
   standalone: true,
-  imports: [CommonModule, OrdersComponent, TableSearchPipe, FormsModule, BillingComponent],
+  imports: [CommonModule, OrdersComponent, TableSearchPipe, FormsModule, BillingComponent,NgxPrintModule],
   templateUrl: './rohika-users.component.html',
   styleUrl: './rohika-users.component.less'
 })
