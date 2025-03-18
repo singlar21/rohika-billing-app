@@ -3,7 +3,7 @@
 
   <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#printModalBulk" (click)="printLabels()"
     style="margin-left: 5px;">
-    <i class="bi bi-printer"></i>
+    <i class="bi bi-printer"></i> Print Labels
   </button>
 
   <input type="text" class="form-control mb-3" [(ngModel)]="searchText" placeholder="Search...">
@@ -104,12 +104,12 @@
         <h5 class="modal-title" id="modalPrintBulk">Products Ordered by User</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
-      <div class="modal-body" *ngIf="openPrintDialog && listOfObjects && listOfObjects.length>0">
-        <app-packaging-group [list]="listOfObjects" id="printArea"></app-packaging-group>
+      <div class="modal-body" *ngIf="openBulkDialog && listOfObjects && listOfObjects.length>0">
+        <app-packaging-group [list]="listOfObjects" id="printAreaBulk"></app-packaging-group>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary" [useExistingCss]="true" printSectionId="printArea"
+        <button type="button" class="btn btn-primary" [useExistingCss]="true" printSectionId="printAreaBulk"
           ngxPrint>Print</button>
       </div>
     </div>

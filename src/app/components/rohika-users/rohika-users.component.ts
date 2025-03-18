@@ -51,12 +51,15 @@ export class RohikaUsersComponent {
     });
   }
 
-  getItemsListByUser(id: number, fromUsers?: boolean) {
+  getItemsListByUser(id: number, fromUsers?: boolean,fromBulkPrint?:boolean) {
     this.itemService.getItemsByUserId(id).subscribe({
       next: (response) => {
         this.itemList = response;
         if (fromUsers) {
           this.openPrintDialog = true;
+
+        }
+        if(fromBulkPrint) {
           let user = this.users.find(user => user.id === id);
           this.listOfObjects.push({ "billData": user, "itemsList": this.itemList });
         }
@@ -81,6 +84,7 @@ export class RohikaUsersComponent {
 
   setUser(user: any) {
     console.error(user);
+    this.openBulkDialog = false;
     this.getItemsListByUser(user.id, true);
 
     this.selectedUser = user;
@@ -121,11 +125,12 @@ export class RohikaUsersComponent {
   }
 
   listOfObjects: any;
+  openBulkDialog:boolean = false;
   printLabels() {
     this.listOfObjects = [];
     for (let id of this.selectedUsers) {
-      this.getItemsListByUser(id, true);
-      // break;
+      this.getItemsListByUser(id, false,true);
+      this.openBulkDialog = true;
     }
 
   }
