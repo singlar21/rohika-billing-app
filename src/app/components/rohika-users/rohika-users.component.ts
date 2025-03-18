@@ -6,29 +6,32 @@ import { ItemsService } from '../services/items.service';
 import { NotificationService } from '../../core/notification/notification.service';
 import { TableSearchPipe } from '../../core/pipes/table-search.pipe';
 import { FormsModule } from '@angular/forms';
-import { BillingComponent } from "../billing/billing.component";
 import { NgxPrintModule } from 'ngx-print';
+import { PackagingGroupComponent } from "../packaging-group/packaging-group.component";
+import { BillingComponent } from '../billing/billing.component';
 
 
 @Component({
   selector: 'app-rohika-users',
   standalone: true,
-  imports: [CommonModule, OrdersComponent, TableSearchPipe, FormsModule, BillingComponent,NgxPrintModule],
+  imports: [CommonModule, OrdersComponent, TableSearchPipe, FormsModule, NgxPrintModule, PackagingGroupComponent,BillingComponent],
   templateUrl: './rohika-users.component.html',
   styleUrl: './rohika-users.component.less'
 })
 export class RohikaUsersComponent {
-  users:any[]=[];
-  itemList:any[]=[];
+  users: any[] = [];
+  itemList: any[] = [];
 
-  selectedUser:any;
+  selectedUser: any;
 
-  searchText:string='';
+  searchText: string = '';
 
-  openPrintDialog:boolean = false;
+  openPrintDialog: boolean = false;
 
-  constructor(private userService:RohikaUsersService,private itemService:ItemsService,private notificationService: NotificationService) {
-    
+  selectedUsers: number[] = [];
+
+  constructor(private userService: RohikaUsersService, private itemService: ItemsService, private notificationService: NotificationService) {
+
   }
 
   ngOnInit() {
@@ -48,13 +51,15 @@ export class RohikaUsersComponent {
     });
   }
 
-  getItemsListByUser(id:number,fromUsers?:boolean) {
+  getItemsListByUser(id: number, fromUsers?: boolean) {
     this.itemService.getItemsByUserId(id).subscribe({
       next: (response) => {
-        if(fromUsers) {
-          this.openPrintDialog = true;
-        }
         this.itemList = response;
+        if (fromUsers) {
+          this.openPrintDialog = true;
+          let user = this.users.find(user => user.id === id);
+          this.listOfObjects.push({ "billData": user, "itemsList": this.itemList });
+        }
       },
       error: (error) => {
         console.error('Error creating items', error);
@@ -62,7 +67,7 @@ export class RohikaUsersComponent {
     });
   }
 
-  deleteUser(id:number) {
+  deleteUser(id: number) {
     this.itemService.deleteUser(id).subscribe({
       next: (response) => {
         this.notificationService.showSuccess("User Deleted Successfully");
@@ -74,23 +79,54 @@ export class RohikaUsersComponent {
     });
   }
 
-  setUser(user:any) {
+  setUser(user: any) {
     console.error(user);
-    this.getItemsListByUser(user.id,true);
-    
+    this.getItemsListByUser(user.id, true);
+
     this.selectedUser = user;
   }
 
   printWindow() {
-    // window.print();  // Simple method to trigger browser print
-          let divContentArea = document.getElementById('printArea');
-          if(divContentArea) {
-            let divContent = divContentArea.innerHTML;
-            var originalContent = document.body.innerHTML;
+    let divContentArea = document.getElementById('printArea');
+    if (divContentArea) {
+      let divContent = divContentArea.innerHTML;
+      var originalContent = document.body.innerHTML;
 
-            document.body.innerHTML = divContent;
-            window.print();
-            document.body.innerHTML = originalContent;
-          }
+      document.body.innerHTML = divContent;
+      window.print();
+      document.body.innerHTML = originalContent;
+    }
+  }
+
+
+  toggleSelection(userId: number) {
+    const index = this.selectedUsers.indexOf(userId);
+    if (index === -1) {
+      this.selectedUsers.push(userId);
+    } else {
+      this.selectedUsers.splice(index, 1);
+    }
+  }
+
+  isSelected(userId: number): boolean {
+    return this.selectedUsers.includes(userId);
+  }
+
+  toggleSelectAll(event: any) {
+    if (event.target.checked) {
+      this.selectedUsers = this.users.map(user => user.id);
+    } else {
+      this.selectedUsers = [];
+    }
+  }
+
+  listOfObjects: any;
+  printLabels() {
+    this.listOfObjects = [];
+    for (let id of this.selectedUsers) {
+      this.getItemsListByUser(id, true);
+      // break;
+    }
+
   }
 }

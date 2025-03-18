@@ -1,12 +1,20 @@
 <div class="container mt-4">
   <h2 class="mb-3">Orders</h2>
 
+  <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#printModalBulk" (click)="printLabels()"
+    style="margin-left: 5px;">
+    <i class="bi bi-printer"></i>
+  </button>
+
   <input type="text" class="form-control mb-3" [(ngModel)]="searchText" placeholder="Search...">
 
   <div class="table-responsive" style="max-height: 75vh; overflow-y: auto;">
     <table class="table table-bordered table-striped">
       <thead class="table-dark position-sticky top-0">
         <tr>
+          <th>
+            <input type="checkbox" (change)="toggleSelectAll($event)">
+          </th>
           <th>Name</th>
           <th>Shopify Order No.</th>
           <th>Phone</th>
@@ -21,6 +29,9 @@
       </thead>
       <tbody *ngIf="users.length > 0">
         <tr *ngFor="let user of users | tableSearch: searchText">
+          <td>
+            <input type="checkbox" [checked]="isSelected(user.id)" (change)="toggleSelection(user.id)">
+          </td>
           <td>{{ user.name }}</td>
           <td>#JBR{{ user.aliasName }}</td>
           <td>{{ user.phone }}</td>
@@ -31,22 +42,22 @@
           <td>{{ user.pincode }}</td>
           <td>{{ user.createdAt | date }}</td>
           <td style="display: inline-flex;">
-            <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#myModal" 
-            (click)="getItemsListByUser(user.id)">
+            <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#myModal"
+              (click)="getItemsListByUser(user.id)">
               <i class="bi bi-info-circle"></i>
-          </button>
-            <!-- <button class="btn btn-primary" (click)="deleteUser(user.id)" style="margin-left: 5px;">
-              <i class="bi bi-trash"></i>
-          </button> -->
-          <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#printModal" 
-          (click)="setUser(user)"  style="margin-left: 5px;" >
-            <i class="bi bi-printer"></i>
-        </button>
+            </button>
+            <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#printModal" (click)="setUser(user)"
+              style="margin-left: 5px;">
+              <i class="bi bi-printer"></i>
+            </button>
           </td>
         </tr>
       </tbody>
     </table>
   </div>
+
+  <!-- Display selected users -->
+  <p class="mt-3"><strong>Selected Users:</strong> {{ selectedUsers | json }}</p>
 </div>
 
 <!-- Bootstrap Modal -->
@@ -75,11 +86,31 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body" *ngIf="openPrintDialog">
-        <app-billing [billData]="selectedUser"  [itemsList]="itemList" id="printArea"></app-billing>
+        <app-billing [billData]="selectedUser" [itemsList]="itemList" id="printArea"></app-billing>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary"  [useExistingCss]="true" printSectionId="printArea" ngxPrint>Print</button>
+        <button type="button" class="btn btn-primary" [useExistingCss]="true" printSectionId="printArea"
+          ngxPrint>Print</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="printModalBulk" tabindex="-1" aria-labelledby="modalPrintBulk" aria-hidden="true">
+  <div class="modal-dialog modal-fullscreen">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="modalPrintBulk">Products Ordered by User</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body" *ngIf="openPrintDialog && listOfObjects && listOfObjects.length>0">
+        <app-packaging-group [list]="listOfObjects" id="printArea"></app-packaging-group>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" [useExistingCss]="true" printSectionId="printArea"
+          ngxPrint>Print</button>
       </div>
     </div>
   </div>

@@ -1,0 +1,6 @@
+<div  class="row" style="margin-left: 10px;margin-right: 10px;">
+    <div *ngFor="let test of list" class="col-6 page-break-after" style="margin-top:10px">
+        <app-packaging [billData]="test.billData" [itemsList]="test.itemsList"></app-packaging>
+        <div class="page-break"></div>
+    </div>
+</div>

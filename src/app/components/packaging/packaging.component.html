@@ -1,46 +1,49 @@
-<div class="packing-slip">
-    <div class="header">Packing Slip</div>
+<!-- <div class="row">
+    <div class="col-6"></div> -->
+    <div class="packing-slip col-6 justify-content-end" style="height: inherit;">
+        <div class="row" style="font-size: 16px;">
+            
 
-    <div class="row" style="font-size: 14px;">
-        <div class="col-3">
-            <strong>From: </strong><br>
-            Rohika
-            <br>
-            6280926290
+            <div class="col-8">
+                <strong>Ship To:</strong><br>
+                {{billData.name}}
+                <br>
+                {{billData.address}},
+                {{ billData.city }},
+                {{ billData.state }},
+                {{ billData.country }},
+                {{ billData.pincode }}
+                <br>
+                {{billData.phone}}
+                <br>
+                <br>
+            </div>
+            <div class="col-3">
+                <strong>From: </strong><br>
+                Rohika
+                <br>
+                6280926290
+            </div>
+            <strong style="font-size: 16px;">** Parcel Opening Video is mandatory for any claims</strong>
         </div>
-        <div class="col-6">
-        </div>
-        <div class="col-3">
-            <!-- Date: {{billData.createdAt | date:'dd-MM-yyyy'}} -->
-            <!-- <br> -->
-            <!-- <br> -->
-            <strong>Ship To:</strong>{{billData.name}}<br>
-            {{billData.address}},
-            {{ billData.city }},
-            {{ billData.state }},
-            {{ billData.country }},
-            {{ billData.pincode }}
-            <br>
-            {{billData.phone}}
-        </div>
-    </div>
 
 
-    <div class="section-title">Order Details:</div>
-    <table class="order-items">
-        <thead>
-            <tr>
-                <th>Qty</th>
-                <th>Item</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr *ngFor="let item of itemsList;let i=index">
-                <td>{{ item.quantity }}</td>
-                <td>{{ item.name }}</td>
-            </tr>
-        </tbody>
-    </table>
-
-    <div class="footer">Rohika™</div>
-</div>
+        <!-- <div class="section-title">Order Details:</div>
+        <table class="order-items">
+            <thead>
+                <tr>
+                    <th>Qty</th>
+                    <th>Item</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let item of itemsList;let i=index">
+                    <td>{{ item.quantity }}</td>
+                    <td>{{ item.name }}</td>
+                </tr>
+            </tbody>
+        </table> -->
+        <br>
+        <div class="footer">Rohika™</div>
+    <!-- </div>
+</div> -->

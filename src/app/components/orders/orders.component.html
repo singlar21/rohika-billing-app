@@ -25,8 +25,12 @@
   </div>
 
   <div class="row col-md-5" *ngIf="itemsList.length > 0" style="float: right;">
-    <label>Tax Amount:: {{itemsList[0].taxAmount}}</label>   
+    <label>Tax Amount:: {{itemsList[0].taxAmount}}</label>
     <br>
-    <label>Bill Amount:: {{itemsList[0].billAmount}}</label>
+    <label>Total Amount:: {{itemsList[0].billAmount}}</label>
+    <br *ngIf="itemsList[0].discount">
+    <label *ngIf="itemsList[0].discount">Discount:: -{{itemsList[0].discount}}</label>
+    <br>
+    <label>Final Amount:: {{itemsList[0].totalAmount}}</label>
   </div>
 </div>
