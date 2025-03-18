@@ -30,6 +30,7 @@ export class RohikaUsersComponent {
 
   selectedUsers: number[] = [];
 
+  cardView: boolean =true;
   constructor(private userService: RohikaUsersService, private itemService: ItemsService, private notificationService: NotificationService) {
 
   }
@@ -133,5 +134,9 @@ export class RohikaUsersComponent {
       this.openBulkDialog = true;
     }
 
+  }
+
+  toggleView() {
+    this.cardView = !this.cardView;
   }
 }
