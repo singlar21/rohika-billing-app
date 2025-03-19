@@ -13,4 +13,9 @@ export class ReportService {
     return this.http.get<any>(url);
   }
 
+  getBestSelling() {
+    let url = "https://rohikastore-5826a7d1db3c.herokuapp.com/report/bestSelling";
+    return this.http.get<any>(url);
+  }
+
 }
