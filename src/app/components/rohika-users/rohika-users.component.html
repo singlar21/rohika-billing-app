@@ -11,6 +11,10 @@
     <i class="bi bi-printer"></i> Print Labels
   </button>
 
+  <button class="btn btn-warning" (click)="toggleSelectAll(null)" style="margin-left: 15px;">
+    Reset Selection
+  </button>
+
   <input type="text" class="form-control mb-3" style="margin-top: 20px;" [(ngModel)]="searchText" placeholder="Search...">
 
 
@@ -71,12 +75,12 @@
         <div class="card shadow-lg p-3 mb-5 bg-white rounded">
           <div class="card-body" style="background-color: antiquewhite;">
             <div class="d-flex align-items-center">
-              <input type="checkbox" [checked]="isSelected(user.id)" (change)="toggleSelection(user.id)" class="me-2">
-              <h5 class="card-title mb-0">{{ user.name }}</h5>
+              <input type="checkbox" [checked]="isSelected(user.id)" [id]="user.id" (change)="toggleSelection(user.id)" class="me-2">
+              <label class="card-title mb-0" [for]="user.id">{{ user.name }}</label>
             </div>
             <p class="card-text"><strong>Order No:</strong> #JBR{{ user.aliasName }}</p>
             <p class="card-text"><strong>Phone:</strong> {{ user.phone }}</p>
-            <p class="card-text"><strong>Address:</strong> {{ user.address }}, {{ user.city }}, {{ user.state }}</p>
+            <p class="card-text" style="min-height: 48px;"><strong>Address:</strong><span *ngIf="user.address"> {{ user.address }}, {{ user.city }}, {{ user.state }}</span></p>
             <p class="card-text"><strong>Pincode:</strong> {{ user.pincode }}</p>
             <p class="card-text"><strong>Created At:</strong> {{ user.createdAt | date }}</p>
 

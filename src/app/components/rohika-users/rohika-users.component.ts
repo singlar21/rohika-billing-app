@@ -118,7 +118,7 @@ export class RohikaUsersComponent {
   }
 
   toggleSelectAll(event: any) {
-    if (event.target.checked) {
+    if (event?.target.checked) {
       this.selectedUsers = this.users.map(user => user.id);
     } else {
       this.selectedUsers = [];
