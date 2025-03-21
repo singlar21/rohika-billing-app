@@ -25,7 +25,9 @@
                 </li>
             </ul>
 
-            <span class="navbar-text text-white">Total Visitors: {{ visitCount }}</span>
+            <span  class="navbar-text text-white" style="margin-right: 20px;">{{ currentDate | date: 'MMMM' }} Sale: {{ currentMonthSales | currency: 'INR' }}</span>
+            <span  class="navbar-text text-white" style="margin-right: 20px;">{{ currentDate | date }}</span>
+            <!-- <span class="navbar-text text-white">Total Visitors: {{ visitCount }}</span> -->
         </div>
     </div>
 </nav>
