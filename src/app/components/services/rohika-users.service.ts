@@ -16,4 +16,9 @@ export class RohikaUsersService {
     return this.http.get<any>(url);
   }
 
+  getUsersByType(type:string) {
+    let url = "https://rohikastore-5826a7d1db3c.herokuapp.com/users/listByUser/"+type;
+    return this.http.get<any>(url);
+  }
+
 }
