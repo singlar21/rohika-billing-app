@@ -1,5 +1,9 @@
 <div class="container mt-4">
     <h2>Expenses List</h2>
+
+  <input type="text" class="form-control mb-3" style="margin-top: 20px;" [(ngModel)]="searchText" placeholder="Search...">
+
+
     <div class="table-responsive">
       <table class="table table-bordered table-striped">
         <thead class="table-dark">
@@ -11,7 +15,7 @@
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let item of expenseList; let i = index">
+          <tr *ngFor="let item of expenseList | tableSearch: searchText; let i = index">
             <td>{{ i + 1 }}</td>
             <td>{{ item.user.name }}</td>
             <td>{{ item.paidAmount }}</td>

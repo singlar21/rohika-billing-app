@@ -1,16 +1,20 @@
 import { Component } from '@angular/core';
 import { ExpenseService } from '../services/expense.service';
 import { CommonModule } from '@angular/common';
+import { TableSearchPipe } from '../../core/pipes/table-search.pipe';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-expenselist',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule,TableSearchPipe,FormsModule],
   templateUrl: './expenselist.component.html',
   styleUrl: './expenselist.component.less'
 })
 export class ExpenselistComponent {
   expenseList:any[]=[];
+
+  searchText: string = '';
 
   constructor(private expenseService:ExpenseService) {
 

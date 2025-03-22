@@ -40,7 +40,7 @@ export class RohikaUsersComponent {
   }
 
   getUserList() {
-    this.userService.getUsers().subscribe({
+    this.userService.getUsersByType('CUSTOMER').subscribe({
       next: (response) => {
         console.log('', response);
         this.users = response;
