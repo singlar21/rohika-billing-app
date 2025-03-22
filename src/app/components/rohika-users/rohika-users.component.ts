@@ -9,6 +9,7 @@ import { FormsModule } from '@angular/forms';
 import { NgxPrintModule } from 'ngx-print';
 import { PackagingGroupComponent } from "../packaging-group/packaging-group.component";
 import { BillingComponent } from '../billing/billing.component';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 
 @Component({
@@ -31,7 +32,9 @@ export class RohikaUsersComponent {
   selectedUsers: number[] = [];
 
   cardView: boolean =true;
-  constructor(private userService: RohikaUsersService, private itemService: ItemsService, private notificationService: NotificationService) {
+  constructor(private userService: RohikaUsersService, private itemService: ItemsService, private notificationService: NotificationService,
+    private spinner: NgxSpinnerService
+  ) {
 
   }
 
@@ -40,6 +43,7 @@ export class RohikaUsersComponent {
   }
 
   getUserList() {
+    this.spinner.show();
     this.userService.getUsersByType('CUSTOMER').subscribe({
       next: (response) => {
         console.log('', response);
@@ -48,11 +52,14 @@ export class RohikaUsersComponent {
       },
       error: (error) => {
         console.error('Error creating user', error);
+      }, complete: () => {
+        this.spinner.hide();
       }
     });
   }
 
   getItemsListByUser(id: number, fromUsers?: boolean,fromBulkPrint?:boolean) {
+    this.spinner.show();
     this.itemService.getItemsByUserId(id).subscribe({
       next: (response) => {
         this.itemList = response;
@@ -67,11 +74,14 @@ export class RohikaUsersComponent {
       },
       error: (error) => {
         console.error('Error creating items', error);
+      }, complete: () => {
+        this.spinner.hide();
       }
     });
   }
 
   deleteUser(id: number) {
+    this.spinner.show();
     this.itemService.deleteUser(id).subscribe({
       next: (response) => {
         this.notificationService.showSuccess("User Deleted Successfully");
@@ -79,6 +89,8 @@ export class RohikaUsersComponent {
       },
       error: (error) => {
         console.error('Error Delete User', error);
+      }, complete: () => {
+        this.spinner.hide();
       }
     });
   }

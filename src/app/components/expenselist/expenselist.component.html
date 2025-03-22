@@ -1,27 +1,45 @@
 <div class="container mt-4">
-    <h2>Expenses List</h2>
+  <h2>Expenses List</h2>
 
-  <input type="text" class="form-control mb-3" style="margin-top: 20px;" [(ngModel)]="searchText" placeholder="Search...">
+  <input type="text" class="form-control mb-3" style="margin-top: 20px;" [(ngModel)]="searchText"
+    placeholder="Search...">
 
+  <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#myModal">
+    <i class="bi bi-plus"></i> Add Expense
+  </button>
+  <div class="table-responsive">
+    <table class="table table-bordered table-striped">
+      <thead class="table-dark">
+        <tr>
+          <th>Sr.</th>
+          <th>User Name</th>
+          <th>Amount</th>
+          <th>Payment Date</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of expenseList | tableSearch: searchText; let i = index">
+          <td>{{ i + 1 }}</td>
+          <td>{{ item.user.name }}</td>
+          <td>{{ item.paidAmount }}</td>
+          <td>{{ item.paidDate }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
 
-    <div class="table-responsive">
-      <table class="table table-bordered table-striped">
-        <thead class="table-dark">
-          <tr>
-            <th>Sr.</th>
-            <th>User Name</th>
-            <th>Amount</th>
-            <th>Payment Date</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let item of expenseList | tableSearch: searchText; let i = index">
-            <td>{{ i + 1 }}</td>
-            <td>{{ item.user.name }}</td>
-            <td>{{ item.paidAmount }}</td>
-            <td>{{ item.paidDate }}</td>
-          </tr>
-        </tbody>
-      </table>
+<!-- Bootstrap Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" aria-labelledby="modalTitle" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="modalTitle">Add Expense</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <app-payment-capture></app-payment-capture>
+      </div>
     </div>
   </div>
+</div>

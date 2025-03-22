@@ -3,11 +3,13 @@ import { ExpenseService } from '../services/expense.service';
 import { CommonModule } from '@angular/common';
 import { TableSearchPipe } from '../../core/pipes/table-search.pipe';
 import { FormsModule } from '@angular/forms';
+import { BillingComponent } from "../billing/billing.component";
+import { PaymentCaptureComponent } from "../payment-capture/payment-capture.component";
 
 @Component({
   selector: 'app-expenselist',
   standalone: true,
-  imports: [CommonModule,TableSearchPipe,FormsModule],
+  imports: [CommonModule, TableSearchPipe, FormsModule, PaymentCaptureComponent],
   templateUrl: './expenselist.component.html',
   styleUrl: './expenselist.component.less'
 })
