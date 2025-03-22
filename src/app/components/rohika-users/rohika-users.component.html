@@ -44,8 +44,8 @@
               <input type="checkbox" [checked]="isSelected(user.id)" (change)="toggleSelection(user.id)">
             </td>
             <td>{{ user.name }}</td>
-            <td>#JBR{{ user.aliasName }}</td>
-            <td>{{ user.phone }}</td>
+            <td>{{ user.aliasName }}</td>
+            <td><span *ngIf="user.phone!=1111111111">{{ user.phone }}</span></td>
             <td>{{ user.address }}</td>
             <td>{{ user.city }}</td>
             <td>{{ user.state }}</td>
@@ -78,8 +78,8 @@
               <input type="checkbox" [checked]="isSelected(user.id)" [id]="user.id" (change)="toggleSelection(user.id)" class="me-2">
               <label class="card-title mb-0" [for]="user.id">{{ user.name }}</label>
             </div>
-            <p class="card-text"><strong>Order No:</strong> #JBR{{ user.aliasName }}</p>
-            <p class="card-text"><strong>Phone:</strong> {{ user.phone }}</p>
+            <p class="card-text"><strong>Order No:</strong> {{ user.aliasName }}</p>
+            <p class="card-text"><strong>Phone:</strong> <span *ngIf="user.phone!=1111111111">{{ user.phone }}</span></p>
             <p class="card-text" style="min-height: 48px;"><strong>Address:</strong><span *ngIf="user.address"> {{ user.address }}, {{ user.city }}, {{ user.state }}</span></p>
             <p class="card-text"><strong>Pincode:</strong> {{ user.pincode }}</p>
             <p class="card-text"><strong>Created At:</strong> {{ user.createdAt | date }}</p>
