@@ -4,11 +4,13 @@ import { VisitService } from './visitors/services/visit.service';
 import { NotificationComponent } from './core/notification/notification.component';
 import { CurrencyPipe, DatePipe } from '@angular/common';
 import { ReportService } from './components/services/report.service';
+import { NgxSpinnerModule, NgxSpinnerService } from "ngx-spinner";
+
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, RouterLink, RouterModule, NotificationComponent,DatePipe,CurrencyPipe],
+  imports: [RouterOutlet, RouterLink, RouterModule, NotificationComponent,DatePipe,CurrencyPipe,NgxSpinnerModule],
   templateUrl: './app.component.html',
   styleUrl: './app.component.less'
 })
@@ -23,15 +25,21 @@ export class AppComponent  implements OnInit{
 
   currentMonthSales: number=0;
 
-  constructor(private reportService:ReportService) {
+  constructor(private reportService:ReportService,private spinner: NgxSpinnerService) {
 
   }
 
   ngOnInit(): void {
     this.getReportData();
   }
+  showSpinner() {
+    this.spinner.show();
+    setTimeout(() => this.spinner.hide(), 3000);
+  }
+
   
   getReportData() {
+    this.showSpinner();
     this.reportService.getReport().subscribe({
       next: (response) => {
         // Get current year and month dynamically

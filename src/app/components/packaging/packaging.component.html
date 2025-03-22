@@ -4,19 +4,21 @@
         <div class="row" style="font-size: 16px;">
             
 
-            <div class="col-8">
+            <div class="col-8" style="min-height: 150px;">
                 <strong>Ship To:</strong><br>
                 {{billData.name}}
                 <br>
-                {{billData.address}},
-                {{ billData.city }},
-                {{ billData.state }},
-                {{ billData.country }},
-                {{ billData.pincode }}
-                <br>
-                {{billData.phone}}
-                <br>
-                <br>
+                <div *ngIf="billData.phone!=1111111111">
+                    {{billData.address}},
+                    {{ billData.city }},
+                    {{ billData.state }},
+                    {{ billData.country }},
+                    {{ billData.pincode }}
+                    <br>
+                    {{billData.phone}}
+                    <br>
+                    <br>
+                </div>
             </div>
             <div class="col-3">
                 <strong>From: </strong><br>
