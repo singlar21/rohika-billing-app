@@ -44,7 +44,7 @@ export class RohikaUsersComponent {
 
   getUserList() {
     this.spinner.show();
-    this.userService.getUsersByType('CUSTOMER').subscribe({
+    this.userService.getUsersByTypeAndCurrentMonth('CUSTOMER').subscribe({
       next: (response) => {
         console.log('', response);
         this.users = response;
