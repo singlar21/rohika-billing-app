@@ -14,6 +14,8 @@ export class ReportComponent {
 
   monthMap:Map<string, number>=new Map<string, number>();
 
+  monthExpenseMap:Map<string, number>=new Map<string, number>();
+
   chartData:any[]=[];
 
   chart: any;
@@ -26,6 +28,7 @@ export class ReportComponent {
   ngAfterViewInit() {
     this.getReportData();
     this.getBestSellingReportData();
+    this.getExpenseReportData();
   }
 
   getReportData() {
@@ -57,7 +60,7 @@ export class ReportComponent {
     this.reportService.getBestSelling().subscribe({
       next: (response) => {
         this.chartData = response;
-        this.createChart();
+        this.productChart();
       },
       error: (error) => {
         console.error('Error creating items', error);
@@ -85,7 +88,7 @@ export class ReportComponent {
     });
   }
 
-  createChart() {
+  productChart() {
     const labels = this.chartData.map(item => item[0]); // Extract product names
     const data = this.chartData.map(item => item[1]); // Extract counts
 
@@ -122,6 +125,51 @@ export class ReportComponent {
           legend: { position: 'top' },
           title: { display: true, text: 'Monthly Product Sales Report' }
         }
+      }
+    });
+  }
+
+  loadExpenseChart() {
+    new Chart("monthlyExpenseChart", {
+      type: 'bar',  // Change to 'line' for a line chart
+      data: {
+        labels: [...this.monthExpenseMap.keys()],
+        datasets: [{
+          label: 'Monthly Expense (in ₹)',
+          data: [...this.monthExpenseMap.values()],
+          backgroundColor: 'rgba(54, 162, 235, 0.6)',
+          borderColor: 'rgba(54, 162, 235, 1)',
+          borderWidth: 2
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false
+      }
+    });
+  }
+
+  getExpenseReportData() {
+    this.reportService.getExpenseReport().subscribe({
+      next: (response) => {
+
+        // Get current year dynamically
+        const currentYear = new Date().getFullYear();
+
+        // Generate all months of the year
+        for (let i = 1; i <= 12; i++) {
+          const formattedMonth = `${currentYear}-${String(i).padStart(2, '0')}`;
+          this.monthExpenseMap.set(formattedMonth, 0); // Default value if missing
+        }
+
+        // Fill in data from JSON
+        response.forEach((entry: { month: string; amount: number; }) => {
+          this.monthExpenseMap.set(entry.month, entry.amount);
+        });
+        this.loadExpenseChart();
+      },
+      error: (error) => {
+        console.error('Error creating items', error);
       }
     });
   }

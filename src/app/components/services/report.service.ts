@@ -18,4 +18,9 @@ export class ReportService {
     return this.http.get<any>(url);
   }
 
+  getExpenseReport() {
+    let url = "https://rohikastore-5826a7d1db3c.herokuapp.com/report/monthlyExpenseReport";
+    return this.http.get<any>(url);
+  }
+
 }
