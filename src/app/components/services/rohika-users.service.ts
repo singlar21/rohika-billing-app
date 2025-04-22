@@ -25,5 +25,10 @@ export class RohikaUsersService {
     let url = "https://rohikastore-5826a7d1db3c.herokuapp.com/users/listByUserCurrentMonth/"+type;
     return this.http.get<any>(url);
   }
+
+  updateAddressById(object:any) {
+    let url = "https://rohikastore-5826a7d1db3c.herokuapp.com/users/updateAddress";
+    return this.http.post<any>(url,object);
+  }
   
 }

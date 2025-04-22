@@ -79,6 +79,10 @@
             <div class="d-flex align-items-center">
               <input type="checkbox" [checked]="isSelected(user.id)" [id]="user.id" (change)="toggleSelection(user.id)" class="me-2">
               <label class="card-title mb-0" [for]="user.id">{{ user.name }}</label>
+              <button class="btn btn-link ms-auto p-0" title="Edit Address"  data-bs-toggle="modal" data-bs-target="#editModal"
+              (click)="selectUser(user)">
+                <i class="bi bi-pencil-square"></i>
+              </button>
             </div>
             <p class="card-text"><strong>Order No:</strong> {{ user.aliasName }}</p>
             <p class="card-text"><strong>Phone:</strong> <span *ngIf="user.phone!=1111111111">{{ user.phone }}</span></p>
@@ -157,6 +161,26 @@
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
         <button type="button" class="btn btn-primary" [useExistingCss]="true" printSectionId="printAreaBulk"
           ngxPrint>Print</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="modalAddress" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="modalAddress">Edit Address</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        Address:
+        <textarea [(ngModel)]="address" style="width: 100%;"></textarea>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" data-bs-dismiss="modal" (click)="editUser()">Update</button>
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
       </div>
     </div>
   </div>

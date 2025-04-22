@@ -101,6 +101,7 @@ export class RohikaUsersComponent {
     this.getItemsListByUser(user.id, true);
 
     this.selectedUser = user;
+    console.error(this.selectedUser);
   }
 
   printWindow() {
@@ -150,5 +151,27 @@ export class RohikaUsersComponent {
 
   toggleView() {
     this.cardView = !this.cardView;
+  }
+
+  address:string = '';
+
+  selectUser(user:any) {
+    this.selectedUser = user;
+    this.address = this.selectedUser.address;
+  }
+
+  editUser() {
+    this.selectedUser.address = this.address;
+    this.userService.updateAddressById(this.selectedUser).subscribe({
+      next: (response) => {
+        this.notificationService.showSuccess("Address Updated Successfully");
+        this.getUserList();
+      },
+      error: (error) => {
+        console.error('Error updating address', error);
+      }, complete: () => {
+        this.spinner.hide();
+      }
+    });
   }
 }
