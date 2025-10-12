@@ -118,7 +118,10 @@
             <p class="card-text"><strong>Phone:</strong> <span *ngIf="user.phone!=1111111111">{{ user.phone }}</span>
             </p>
             <p class="card-text" style="min-height: 48px;"><strong>Address:</strong><span *ngIf="user.address"> {{
-                user.address }}, {{ user.city }}, {{ user.state }}</span></p>
+                user.address }}
+            </span></p>
+            <p class="card-text"><strong>City:</strong> {{ user.city }}</p>
+            <p class="card-text"><strong>State:</strong> {{ user.state }}</p>
             <p class="card-text"><strong>Pincode:</strong> {{ user.pincode }}</p>
             <p class="card-text"><strong>Created At:</strong> {{ user.createdAt | date }}</p>
 
@@ -130,7 +133,7 @@
               </button>
               <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#printModal"
                 (click)="setUser(user)">
-                <i class="bi bi-printer"></i> Print
+                <i class="bi bi-printer"></i>Print Bill
               </button>
             </div>
           </div>
