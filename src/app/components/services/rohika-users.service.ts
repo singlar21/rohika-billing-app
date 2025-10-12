@@ -21,10 +21,11 @@ export class RohikaUsersService {
     return this.http.get<any>(url);
   }
 
-  getUsersByTypeAndCurrentMonth(type:string) {
-    let url = "https://rohikastore-5826a7d1db3c.herokuapp.com/users/listByUserCurrentMonth/"+type;
-    return this.http.get<any>(url);
-  }
+getUsersByTypeAndCurrentMonth(type: string, month: number, year: number) {
+  const url = `http://localhost:8080/users/listByUserCurrentMonth/${type}?month=${month}&year=${year}`;
+  return this.http.get<any>(url);
+}
+
 
   updateAddressById(object:any) {
     let url = "https://rohikastore-5826a7d1db3c.herokuapp.com/users/updateAddress";

@@ -21,12 +21,18 @@
         display: none !important;
     }
 
-    .page-break {
-        break-before: always;  /* Ensures content after starts on a new page */
-    }
 
     .page-break-after {
         break-after: always;
+    }
+
+    .page-break-billing {
+        page-break-after: always;
+        break-after: page;
+    }
+
+    .page-break-label {
+        break-before: always;
     }
     
 }

@@ -10,12 +10,13 @@ import { NgxPrintModule } from 'ngx-print';
 import { PackagingGroupComponent } from "../packaging-group/packaging-group.component";
 import { BillingComponent } from '../billing/billing.component';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { TableFilterPipe } from '../../pipes/table-filter.pipe';
 
 
 @Component({
   selector: 'app-rohika-users',
   standalone: true,
-  imports: [CommonModule, OrdersComponent, TableSearchPipe, FormsModule, NgxPrintModule, PackagingGroupComponent,BillingComponent],
+  imports: [CommonModule, OrdersComponent, TableSearchPipe, FormsModule, NgxPrintModule, PackagingGroupComponent,BillingComponent,TableFilterPipe],
   templateUrl: './rohika-users.component.html',
   styleUrl: './rohika-users.component.less'
 })
@@ -31,7 +32,39 @@ export class RohikaUsersComponent {
 
   selectedUsers: number[] = [];
 
+  filters = {
+  name: '',
+  aliasName: '',
+  phone: '',
+  address: '',
+  city: '',
+  state: '',
+  country: '',
+  pincode: '',
+  createdAt: ''
+};
+
+selectedYear: string = '';
+selectedMonth: string = '';
+years: number[] = [];
+months = [
+  { name: 'January', value: '01' },
+  { name: 'February', value: '02' },
+  { name: 'March', value: '03' },
+  { name: 'April', value: '04' },
+  { name: 'May', value: '05' },
+  { name: 'June', value: '06' },
+  { name: 'July', value: '07' },
+  { name: 'August', value: '08' },
+  { name: 'September', value: '09' },
+  { name: 'October', value: '10' },
+  { name: 'November', value: '11' },
+  { name: 'December', value: '12' }
+];
+
+
   cardView: boolean =true;
+  isPrintLabels: boolean = true;
   constructor(private userService: RohikaUsersService, private itemService: ItemsService, private notificationService: NotificationService,
     private spinner: NgxSpinnerService
   ) {
@@ -39,12 +72,25 @@ export class RohikaUsersComponent {
   }
 
   ngOnInit() {
+    const currentDate = new Date();
+  const currentYear = currentDate.getFullYear();
+  const currentMonth = (currentDate.getMonth() + 1).toString().padStart(2, '0');
+
+  // Generate years starting from 2025 up to currentYear + 5
+  for (let y = 2025; y <= currentYear + 5; y++) {
+    this.years.push(y);
+  }
+
+  // ✅ Default to current month and year
+  this.selectedYear = currentYear.toString();
+  this.selectedMonth = currentMonth;
     this.getUserList();
   }
 
   getUserList() {
     this.spinner.show();
-    this.userService.getUsersByTypeAndCurrentMonth('CUSTOMER').subscribe({
+
+    this.userService.getUsersByTypeAndCurrentMonth('CUSTOMER',+this.selectedMonth,+this.selectedYear).subscribe({
       next: (response) => {
         console.log('', response);
         this.users = response;
@@ -140,8 +186,9 @@ export class RohikaUsersComponent {
 
   listOfObjects: any;
   openBulkDialog:boolean = false;
-  printLabels() {
+  printLabels(labels:boolean) {
     this.listOfObjects = [];
+    this.isPrintLabels = labels
     for (let id of this.selectedUsers) {
       this.getItemsListByUser(id, false,true);
       this.openBulkDialog = true;
@@ -174,4 +221,9 @@ export class RohikaUsersComponent {
       }
     });
   }
+
+  onFilterChange() {
+    this.getUserList();
+  }
+
 }
