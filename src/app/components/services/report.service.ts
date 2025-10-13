@@ -1,26 +1,25 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { environment } from '../../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ReportService {
 
-  constructor(private http:HttpClient) { }
+  private baseUrl = environment.apiBaseUrl; // ✅ centralized prefix
+
+  constructor(private http: HttpClient) { }
 
   getReport() {
-    let url = "https://rohikastore-5826a7d1db3c.herokuapp.com/report/totalSale";
-    return this.http.get<any>(url);
+    return this.http.get<any>(`${this.baseUrl}/report/totalSale`);
   }
 
   getBestSelling() {
-    let url = "https://rohikastore-5826a7d1db3c.herokuapp.com/report/bestSelling";
-    return this.http.get<any>(url);
+    return this.http.get<any>(`${this.baseUrl}/report/bestSelling`);
   }
 
   getExpenseReport() {
-    let url = "https://rohikastore-5826a7d1db3c.herokuapp.com/report/monthlyExpenseReport";
-    return this.http.get<any>(url);
+    return this.http.get<any>(`${this.baseUrl}/report/monthlyExpenseReport`);
   }
-
 }

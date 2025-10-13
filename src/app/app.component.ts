@@ -1,16 +1,17 @@
 import { Component, OnInit } from '@angular/core';
-import { RouterLink, RouterModule, RouterOutlet } from '@angular/router';
+import { Router, RouterLink, RouterModule, RouterOutlet } from '@angular/router';
 import { VisitService } from './visitors/services/visit.service';
 import { NotificationComponent } from './core/notification/notification.component';
-import { CurrencyPipe, DatePipe } from '@angular/common';
+import { CurrencyPipe, DatePipe, NgIf } from '@angular/common';
 import { ReportService } from './components/services/report.service';
 import { NgxSpinnerModule, NgxSpinnerService } from "ngx-spinner";
+import { AuthService } from './components/services/auth.service';
 
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, RouterLink, RouterModule, NotificationComponent,DatePipe,CurrencyPipe,NgxSpinnerModule],
+  imports: [RouterOutlet, RouterLink, RouterModule, NotificationComponent, DatePipe, CurrencyPipe, NgxSpinnerModule, NgIf],
   templateUrl: './app.component.html',
   styleUrl: './app.component.less'
 })
@@ -25,7 +26,7 @@ export class AppComponent  implements OnInit{
 
   currentMonthSales: number=0;
 
-  constructor(private reportService:ReportService,private spinner: NgxSpinnerService) {
+  constructor(private reportService:ReportService,private spinner: NgxSpinnerService, private authService:AuthService, private router: Router) {
 
   }
 
@@ -65,6 +66,15 @@ export class AppComponent  implements OnInit{
         console.error('Error fetching report data', error);
       }
     });
+  }
+
+  isAuthenticated() {
+    return this.authService.isLoggedIn();
+  }
+
+  logout() {
+    this.authService.logout();
+    this.router.navigate(['/products']); // redirect after login
   }
   
 }

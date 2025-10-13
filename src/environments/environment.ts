@@ -1,3 +1,4 @@
 export const environment = {
-    production: false
-  };
+    production: true,
+    apiBaseUrl: 'https://rohikastore-5826a7d1db3c.herokuapp.com'
+};

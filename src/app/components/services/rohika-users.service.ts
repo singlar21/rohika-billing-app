@@ -1,35 +1,31 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { environment } from '../../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class RohikaUsersService {
 
+  private baseUrl = environment.apiBaseUrl;
 
-  constructor(private http:HttpClient) { }
-
+  constructor(private http: HttpClient) { }
 
   getUsers() {
-    let url = "https://rohikastore-5826a7d1db3c.herokuapp.com/users/list"
-        // let url = "http://localhost:8080/users/list"
-    return this.http.get<any>(url);
+    return this.http.get<any>(`${this.baseUrl}/users/list`);
   }
 
-  getUsersByType(type:string) {
-    let url = "https://rohikastore-5826a7d1db3c.herokuapp.com/users/listByUser/"+type;
-    return this.http.get<any>(url);
+  getUsersByType(type: string) {
+    return this.http.get<any>(`${this.baseUrl}/users/listByUser/${type}`);
   }
 
-getUsersByTypeAndCurrentMonth(type: string, month: number, year: number) {
-  const url = `http://localhost:8080/users/listByUserCurrentMonth/${type}?month=${month}&year=${year}`;
-  return this.http.get<any>(url);
-}
-
-
-  updateAddressById(object:any) {
-    let url = "https://rohikastore-5826a7d1db3c.herokuapp.com/users/updateAddress";
-    return this.http.post<any>(url,object);
+  getUsersByTypeAndCurrentMonth(type: string, month: number, year: number) {
+    return this.http.get<any>(
+      `${this.baseUrl}/users/listByUserCurrentMonth/${type}?month=${month}&year=${year}`
+    );
   }
-  
+
+  updateAddressById(object: any) {
+    return this.http.post<any>(`${this.baseUrl}/users/updateAddress`, object);
+  }
 }

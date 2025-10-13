@@ -4,14 +4,16 @@ import { RohikaUsersComponent } from './components/rohika-users/rohika-users.com
 import { ReportComponent } from './components/report/report.component';
 import { PaymentCaptureComponent } from './components/payment-capture/payment-capture.component';
 import { ExpenselistComponent } from './components/expenselist/expenselist.component';
+import { LoginComponent } from './components/login/login.component';
+import { AuthGuard } from './components/guards/auth.guard';
+
 
 export const routes: Routes = [
-
-    { path: '', component: RohikaUsersComponent },
-    { path: 'products', component: ProductsComponent },
-    { path: 'orders', component: RohikaUsersComponent },
-    { path: 'reports', component: ReportComponent },
-    {path:'expenses',component:PaymentCaptureComponent},
-    {path:'expenseList',component:ExpenselistComponent}
-
+  { path: 'login', component: LoginComponent },
+  { path: '', redirectTo: '/login', pathMatch: 'full' },
+  { path: 'products', component: ProductsComponent, canActivate: [AuthGuard] },
+  { path: 'orders', component: RohikaUsersComponent, canActivate: [AuthGuard] },
+  { path: 'reports', component: ReportComponent, canActivate: [AuthGuard] },
+  { path: 'expenses', component: PaymentCaptureComponent, canActivate: [AuthGuard] },
+  { path: 'expenseList', component: ExpenselistComponent, canActivate: [AuthGuard] }
 ];

@@ -1,23 +1,24 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { environment } from '../../../environments/environment';  // ✅ import environment
 
 @Injectable({
   providedIn: 'root'
 })
 export class ItemsService {
 
-  constructor(private http:HttpClient) { }
+  private baseUrl = environment.apiBaseUrl;  // ✅ centralized prefix
 
-  getItemsByUserId(userId:number) {
-    let url = "https://rohikastore-5826a7d1db3c.herokuapp.com/items/listByUser/"+userId;
-        // let url = "http://localhost:8080/users/list"
-    return this.http.get<any>(url);
+  constructor(private http: HttpClient) { }
+
+  getItemsByUserId(userId: number) {
+    return this.http.get<any>(`${this.baseUrl}/items/listByUser/${userId}`);
   }
 
-  deleteUser(userId:number) {
-    // let url = "https://rohikastore-5826a7d1db3c.herokuapp.com/users/deleteUser/"+userId;
-    let url = "http://localhost:8080/users/delete/"+userId;
-    return this.http.delete<any>(url,{ responseType: 'text' as 'json' });
+  deleteUser(userId: number) {
+    return this.http.delete<any>(
+      `${this.baseUrl}/users/delete/${userId}`,
+      { responseType: 'text' as 'json' }
+    );
   }
-
 }
