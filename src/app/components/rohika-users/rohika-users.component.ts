@@ -63,7 +63,7 @@ months = [
 ];
 
 
-  cardView: boolean =true;
+  cardView: boolean =false;
   isPrintLabels: boolean = true;
   constructor(private userService: RohikaUsersService, private itemService: ItemsService, private notificationService: NotificationService,
     private spinner: NgxSpinnerService

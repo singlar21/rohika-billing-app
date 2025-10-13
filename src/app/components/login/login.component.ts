@@ -21,7 +21,7 @@ username: string = '';
   login() {
     this.authService.login(this.username, this.password).subscribe({
       next: () => {
-        this.router.navigate(['/products']); // redirect after login
+        this.router.navigate(['/orders']); // redirect after login
       },
       error: err => {
         this.errorMessage = 'Invalid username or password';
