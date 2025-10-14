@@ -25,17 +25,23 @@
       </div>
 
       <!-- Password -->
-      <div class="mb-3">
+      <div class="mb-3 position-relative">
         <label for="password" class="form-label">Password</label>
         <input
-          type="password"
+          [type]="showPassword ? 'text' : 'password'"
           id="password"
-          class="form-control"
+          class="form-control pe-5"
           [(ngModel)]="password"
           name="password"
           placeholder="Enter your password"
           required
         />
+        <i
+          class="bi"
+          [ngClass]="showPassword ? 'bi-eye-slash' : 'bi-eye'"
+          (click)="showPassword = !showPassword"
+          style="position: absolute; top: 38px; right: 15px; cursor: pointer;"
+        ></i>
       </div>
 
       <!-- Submit -->

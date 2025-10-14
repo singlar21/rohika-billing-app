@@ -74,7 +74,7 @@ export class AppComponent  implements OnInit{
 
   logout() {
     this.authService.logout();
-    this.router.navigate(['/products']); // redirect after login
+    this.router.navigate(['/login']); // redirect after logout
   }
   
 }
