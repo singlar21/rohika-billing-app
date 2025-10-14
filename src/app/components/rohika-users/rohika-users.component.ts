@@ -65,6 +65,7 @@ months = [
 
   cardView: boolean =false;
   isPrintLabels: boolean = true;
+  errorCount:number = 0;
   constructor(private userService: RohikaUsersService, private itemService: ItemsService, private notificationService: NotificationService,
     private spinner: NgxSpinnerService
   ) {
@@ -94,7 +95,7 @@ months = [
       next: (response) => {
         console.log('', response);
         this.users = response;
-        // Handle success, such as showing a success message
+        this.errorCount = this.users.filter(user=> !user.country || !user.state || user.state == 'null')?.length;
       },
       error: (error) => {
         console.error('Error creating user', error);
