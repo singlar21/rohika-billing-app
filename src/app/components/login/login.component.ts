@@ -17,7 +17,12 @@ username: string = '';
   errorMessage: string = '';
   showPassword:boolean = false;
 
-  constructor(private authService: AuthService, private router: Router) {}
+  constructor(private authService: AuthService, private router: Router) {
+    if(authService.isLoggedIn()){
+      this.router.navigate(['/orders']); // redirect if logged In
+    }
+
+  }
 
   login() {
     this.authService.login(this.username, this.password).subscribe({
