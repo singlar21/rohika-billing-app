@@ -1,28 +1,30 @@
 <div class="container mt-4">
-  <h2>Expenses List</h2>
-
+  <div style="align-items: center;">
+    <h2>Expenses List</h2>
+    <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#myModal">
+      <i class="bi bi-plus"></i> Add Expense
+    </button>
+  </div>
   <input type="text" class="form-control mb-3" style="margin-top: 20px;" [(ngModel)]="searchText"
     placeholder="Search...">
 
-  <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#myModal">
-    <i class="bi bi-plus"></i> Add Expense
-  </button>
-  <div class="table-responsive">
+
+  <div class="table-responsive" style="margin-top: 10px;">
     <table class="table table-bordered table-striped">
       <thead class="table-dark">
         <tr>
-          <th>Sr.</th>
-          <th>User Name</th>
-          <th>Amount</th>
+          <!-- <th>Sr.</th> -->
+          <th>Vendor Name</th>
+          <th>Amount Paid</th>
           <th>Payment Date</th>
         </tr>
       </thead>
       <tbody>
         <tr *ngFor="let item of expenseList | tableSearch: searchText; let i = index">
-          <td>{{ i + 1 }}</td>
+          <!-- <td>{{ i + 1 }}</td> -->
           <td>{{ item.user.name }}</td>
           <td>{{ item.paidAmount }}</td>
-          <td>{{ item.paidDate }}</td>
+          <td>{{ item.paidDate | date:'dd-MMM-yyyy'}}</td>
         </tr>
       </tbody>
     </table>

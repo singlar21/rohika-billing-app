@@ -13,7 +13,7 @@ export const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
   { path: 'products', component: ProductsComponent, canActivate: [AuthGuard] },
   { path: 'orders', component: RohikaUsersComponent, canActivate: [AuthGuard] },
-  { path: 'reports', component: ReportComponent, canActivate: [AuthGuard] },
+  { path: 'dashboard', component: ReportComponent, canActivate: [AuthGuard] },
   { path: 'expenses', component: PaymentCaptureComponent, canActivate: [AuthGuard] },
   { path: 'expenseList', component: ExpenselistComponent, canActivate: [AuthGuard] }
 ];
