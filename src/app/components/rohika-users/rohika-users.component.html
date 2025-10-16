@@ -35,8 +35,11 @@
   </button>
 
 
-  <span style="float: right;">Current Month Orders:: {{users.length}}</span>
-
+  <span style="float: right;">Total Orders:: {{users.length}}</span>
+  <br>
+  <span style="float: right;">India Orders:: {{indiaOrderCount}}</span>
+  <br>
+  <span style="float: right;">International Orders:: {{internationalOrderCount}}</span>
 
   <div style="margin: 10px;"><span style="color: red;">There are {{errorCount}} Orders with address issues. Please fix them on Shopify!:: </span></div>
   <input type="text" class="form-control mb-3" style="margin-top: 20px;" [(ngModel)]="searchText"
