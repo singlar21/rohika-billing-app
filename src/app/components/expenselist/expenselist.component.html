@@ -1,7 +1,11 @@
 <div class="container mt-4">
   <div style="align-items: center;">
     <h2>Expenses List</h2>
-    <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#myModal">
+    <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#vendorModal" style="margin-right: 20px;">
+      <i class="bi bi-plus"></i> Add Vendor
+    </button>
+
+    <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#paymentModal">
       <i class="bi bi-plus"></i> Add Expense
     </button>
   </div>
@@ -31,8 +35,8 @@
   </div>
 </div>
 
-<!-- Bootstrap Modal -->
-<div class="modal fade" id="myModal" tabindex="-1" aria-labelledby="modalTitle" aria-hidden="true">
+<!-- Payment Modal -->
+<div class="modal fade" id="paymentModal" tabindex="-1" aria-labelledby="modalTitle" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
@@ -40,7 +44,22 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        <app-payment-capture></app-payment-capture>
+        <app-payment-capture (saved)="onExpenseSaved()"></app-payment-capture>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Vendor Modal -->
+<div class="modal fade" id="vendorModal" tabindex="-1" aria-labelledby="modalTitle" aria-hidden="true" #vendorModal>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="modalTitle">Add Vendor</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+          <app-add-vendor (saved)="onVendorSaved()"></app-add-vendor>
       </div>
     </div>
   </div>

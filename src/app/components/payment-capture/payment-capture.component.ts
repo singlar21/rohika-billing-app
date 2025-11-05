@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { UsersService } from '../../users/create-users/users.service';
 import { RohikaUsersService } from '../services/rohika-users.service';
@@ -14,6 +14,10 @@ import { NotificationService } from '../../core/notification/notification.servic
   styleUrl: './payment-capture.component.less'
 })
 export class PaymentCaptureComponent {
+
+  @Output()
+  saved:EventEmitter<void> = new EventEmitter();
+
   expenseForm: FormGroup;
   users:any[]=[]
 
@@ -50,6 +54,7 @@ export class PaymentCaptureComponent {
       next: (response) => {
         this.notificationService.showSuccess('Data Saved Successfully');
         this.expenseForm.reset();
+        this.saved.emit();
       },
       error: (error) => {
         console.error('Error creating user', error);

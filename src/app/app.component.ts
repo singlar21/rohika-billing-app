@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { Router, RouterLink, RouterModule, RouterOutlet } from '@angular/router';
 import { VisitService } from './visitors/services/visit.service';
 import { NotificationComponent } from './core/notification/notification.component';
@@ -16,6 +16,9 @@ import { AuthService } from './components/services/auth.service';
   styleUrl: './app.component.less'
 })
 export class AppComponent  implements OnInit{
+
+  @ViewChild("InputData")
+  el:ElementRef | undefined;
   
   title = 'rohika-billing';
   visitCount:any = '';
@@ -35,7 +38,7 @@ export class AppComponent  implements OnInit{
   }
   showSpinner() {
     this.spinner.show();
-    setTimeout(() => this.spinner.hide(), 3000);
+    // setTimeout(() => this.spinner.hide(), 3000);
   }
 
   
@@ -61,8 +64,10 @@ export class AppComponent  implements OnInit{
   
         // Assign the current month's sales
         this.currentMonthSales = this.monthMap.get(currentFormattedMonth) || 0;
+        this.spinner.hide();
       },
       error: (error) => {
+        this.spinner.hide();
         console.error('Error fetching report data', error);
       }
     });

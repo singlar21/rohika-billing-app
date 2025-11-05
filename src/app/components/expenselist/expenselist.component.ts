@@ -1,30 +1,34 @@
-import { Component } from '@angular/core';
+import { Component, inject, TemplateRef, ViewChild } from '@angular/core';
 import { ExpenseService } from '../services/expense.service';
 import { CommonModule } from '@angular/common';
 import { TableSearchPipe } from '../../core/pipes/table-search.pipe';
 import { FormsModule } from '@angular/forms';
-import { BillingComponent } from "../billing/billing.component";
 import { PaymentCaptureComponent } from "../payment-capture/payment-capture.component";
+import { AddVendorComponent } from "../add-vendor/add-vendor.component";
+import { Route, Router } from '@angular/router';
+
+declare var bootstrap: any;
 
 @Component({
   selector: 'app-expenselist',
   standalone: true,
-  imports: [CommonModule, TableSearchPipe, FormsModule, PaymentCaptureComponent],
+  imports: [CommonModule, TableSearchPipe, FormsModule, PaymentCaptureComponent, AddVendorComponent],
   templateUrl: './expenselist.component.html',
   styleUrl: './expenselist.component.less'
 })
 export class ExpenselistComponent {
-  expenseList:any[]=[];
+  expenseList: any[] = [];
 
   searchText: string = '';
 
-  constructor(private expenseService:ExpenseService) {
+  @ViewChild('vendorModal') vendorModal!: TemplateRef<any>;
+  modalInstance: any;
 
-  }
+  expenseService: ExpenseService = inject(ExpenseService);
+  router:Router = inject(Router);
 
   ngOnInit() {
     this.getExpenseList();
-
   }
 
   getExpenseList() {
@@ -37,4 +41,28 @@ export class ExpenselistComponent {
       }
     });
   }
- }
+
+  closeModal(id:string) {
+    const modalEl = document.getElementById(id);
+    if (modalEl) {
+      const modalInstance = bootstrap.Modal.getInstance(modalEl);
+      modalInstance?.hide();
+      this.refreshRoute();
+    }
+  }
+
+  onVendorSaved() {
+    this.closeModal('vendorModal');
+  }
+
+  onExpenseSaved() {
+    this.closeModal('paymentModal');
+  }
+
+  refreshRoute() {
+  this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
+    this.router.navigate(['/expenseList']);
+  });
+  }
+
+}

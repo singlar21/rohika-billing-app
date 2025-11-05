@@ -2,7 +2,7 @@
   <form [formGroup]="expenseForm" (ngSubmit)="onSubmit()">
 
     <div class="mb-3">
-      <label for="userId" class="form-label">User ID</label>
+      <label for="userId" class="form-label">Vendor Name</label>
       <select id="userId" class="form-control" formControlName="userId" required>
         <option *ngFor="let val of users" [value]="val.id">{{val.name}}</option>
 
@@ -13,6 +13,14 @@
       <label for="paidAmount" class="form-label">Paid Amount</label>
       <input type="number" id="paidAmount" class="form-control" formControlName="paidAmount" required />
     </div>
+
+    <!-- <div class="mb-3">
+      <label for="userId" class="form-label">Payment Type</label>
+      <select id="userId" class="form-control" formControlName="userId" required>
+        <option *ngFor="let val of users" [value]="val.id">{{val.name}}</option>
+
+      </select>
+    </div> -->
 
     <div class="mb-3">
       <label for="paidDate" class="form-label">Paid Date</label>

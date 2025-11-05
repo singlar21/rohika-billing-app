@@ -1,0 +1,67 @@
+<form [formGroup]="form" (ngSubmit)="onSubmit()" class="p-3">
+  <div class="row g-3">
+
+    <div class="col-md-6">
+      <label class="form-label required">Name</label>
+      <input type="text" class="form-control" formControlName="name" placeholder="Enter name" />
+    </div>
+
+    <div class="col-md-6">
+      <label class="form-label">Email</label>
+      <input type="email" class="form-control" formControlName="email" placeholder="Enter email" />
+    </div>
+
+    <div class="col-md-6">
+      <label class="form-label required">Phone</label>
+      <input type="text" class="form-control" formControlName="phone" placeholder="Enter phone" />
+    </div>
+
+    <div class="col-md-6">
+      <label class="form-label">Country Code</label>
+      <input type="number" class="form-control" formControlName="countryCode" placeholder="Country code" />
+    </div>
+
+    <div class="col-md-6">
+      <label class="form-label">Alias Name</label>
+      <input type="text" class="form-control" formControlName="aliasName" placeholder="Alias name" />
+    </div>
+
+    <div class="col-md-6">
+      <label class="form-label">User Type</label>
+      <select class="form-select" formControlName="userType">
+        <option *ngFor="let type of userTypes" [value]="type">{{ type }}</option>
+      </select>
+    </div>
+
+    <div class="col-md-6">
+      <label class="form-label">City</label>
+      <input type="text" class="form-control" formControlName="city" placeholder="City" />
+    </div>
+
+    <div class="col-md-6">
+      <label class="form-label">State</label>
+      <input type="text" class="form-control" formControlName="state" placeholder="State" />
+    </div>
+
+    <div class="col-md-6">
+      <label class="form-label required">Country</label>
+      <input type="text" class="form-control" formControlName="country" placeholder="Country" />
+    </div>
+
+    <div class="col-md-6">
+      <label class="form-label">Pincode</label>
+      <input type="text" class="form-control" formControlName="pincode" placeholder="Pincode" />
+    </div>
+
+    <div class="col-12">
+      <label class="form-label">Address</label>
+      <textarea class="form-control" rows="2" formControlName="address" placeholder="Address"></textarea>
+    </div>
+
+  </div>
+
+  <div class="mt-4 d-flex justify-content-end gap-2">
+    <!-- <button type="button" class="btn btn-secondary" (click)="onCancel()">Cancel</button> -->
+    <button type="submit" class="btn btn-primary" [disabled]="!form.valid">Save</button>
+  </div>
+</form>
