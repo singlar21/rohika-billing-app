@@ -14,12 +14,20 @@
         <div class="col-3">
             <strong>Bill To: {{billData.name}}</strong><br>
             {{billData.address}}
+            @if(billData.city) {
             {{ billData.city }},
+            }
+            @if(billData.state) {
             {{ billData.state }},
-            {{ billData.country }},
-            {{ billData.pincode }}
+            }
+            {{ billData.country }}
+            @if(billData.state) {
+                ,{{ billData.pincode }}
+            }
             <br>
-            {{billData.phone}}
+            @if(billData.phone && billData.phone!='1111111111') {
+                {{billData.phone}}
+            }
         </div>
         <div class="col-6">
         </div>
@@ -29,14 +37,6 @@
             Date: {{billData.createdAt | date:'dd-MM-yyyy'}}
             <br>
             <br>
-            <!-- <strong>Ship To:</strong><br>
-            {{billData.address}}
-            {{ billData.city }},
-            {{ billData.state }},
-            {{ billData.country }},
-            {{ billData.pincode }}
-            <br>
-            {{billData.phone}} -->
         </div>
     </div>
 
