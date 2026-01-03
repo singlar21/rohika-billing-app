@@ -79,8 +79,8 @@ months = [
   const currentYear = currentDate.getFullYear();
   const currentMonth = (currentDate.getMonth() + 1).toString().padStart(2, '0');
 
-  // Generate years starting from 2025 up to currentYear + 5
-  for (let y = 2025; y <= currentYear + 5; y++) {
+  // Generate years starting from 2025 up to currentYear + 1
+  for (let y = 2025; y <= currentYear + 1; y++) {
     this.years.push(y);
   }
 
@@ -99,7 +99,7 @@ months = [
         this.users = response;
         this.indiaOrderCount = this.users.filter(user=> user.country && user.country=='India')?.length;
         this.internationalOrderCount = this.users.filter(user=> !user.country || user.country!='India')?.length;
-        this.errorCount = this.users.filter(user=> !user.country || !user.state || user.state == 'null')?.length;
+        this.errorCount = this.users.filter(user=> !user.country || (user.country == 'India' && (!user.state || user.state == 'null')))?.length;
       },
       error: (error) => {
         console.error('Error creating user', error);

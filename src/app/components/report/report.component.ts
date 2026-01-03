@@ -36,10 +36,12 @@ export class ReportComponent {
       next: (response) => {
 
         // Get current year dynamically
-        const currentYear = new Date().getFullYear();
+        let date = new Date();
+        const currentYear = date.getFullYear();
+        const currentMonth = date.getMonth();
 
         // Generate all months of the year
-        for (let i = 1; i <= 12; i++) {
+        for (let i = 1; i <= currentMonth; i++) {
           const formattedMonth = `${currentYear}-${String(i).padStart(2, '0')}`;
           this.monthMap.set(formattedMonth, 0); // Default value if missing
         }
@@ -153,19 +155,24 @@ export class ReportComponent {
     this.reportService.getExpenseReport().subscribe({
       next: (response) => {
 
-        // Get current year dynamically
-        const currentYear = new Date().getFullYear();
-
-        // Generate all months of the year
-        for (let i = 1; i <= 12; i++) {
-          const formattedMonth = `${currentYear}-${String(i).padStart(2, '0')}`;
-          this.monthExpenseMap.set(formattedMonth, 0); // Default value if missing
-        }
-
         // Fill in data from JSON
         response.forEach((entry: { month: string; amount: number; }) => {
           this.monthExpenseMap.set(entry.month, entry.amount);
         });
+
+        // Get current year dynamically
+        let date = new Date();
+        const currentYear = date.getFullYear();
+        const currentMonth = date.getMonth();
+
+        // Generate all months of the year
+        for (let i = 1; i <= currentMonth; i++) {
+          const formattedMonth = `${currentYear}-${String(i).padStart(2, '0')}`;
+          if(!this.monthExpenseMap.has(formattedMonth)) {
+            this.monthExpenseMap.set(formattedMonth, 0); // Default value if missing
+          }
+        }
+
         this.loadExpenseChart();
       },
       error: (error) => {

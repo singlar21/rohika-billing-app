@@ -41,7 +41,10 @@
   <br>
   <span style="float: right;">International Orders:: {{internationalOrderCount}}</span>
 
-  <div style="margin: 10px;"><span style="color: red;">There are {{errorCount}} Orders with address issues. Please fix them on Shopify!:: </span></div>
+  @if(errorCount>0) {
+    <div style="margin: 10px;"><span style="color: red;">There are {{errorCount}} Orders with address issues. Please fix them on Shopify!:: </span></div>
+  }
+
   <input type="text" class="form-control mb-3" style="margin-top: 20px;" [(ngModel)]="searchText"
     placeholder="Search...">
 
@@ -80,7 +83,7 @@
               <input type="checkbox" [checked]="isSelected(user.id)" (change)="toggleSelection(user.id)">
             </td>
             <td>{{ user.name }}</td>
-            <td [class.error]="!user.country || !user.state || user.state == 'null'">{{ user.aliasName }}</td>
+            <td [class.error]="!user.country || (user.country == 'India' && (!user.state || user.state == 'null'))">{{ user.aliasName }}</td>
             <td><span *ngIf="user.phone!=1111111111">{{ user.phone }}</span></td>
             <td>{{ user.address }}</td>
             <td>{{ user.city }}</td>
