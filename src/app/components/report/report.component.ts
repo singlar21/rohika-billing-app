@@ -74,6 +74,17 @@ export class ReportComponent {
   }
 
   loadChart() {
+    const bgColors = [
+      'rgba(255, 99, 132, 0.6)',
+      ...Array(this.monthMap.size - 1).fill('rgba(54, 162, 235, 0.6)')
+    ];
+
+    const borderColors = [
+      'rgba(255, 99, 132, 1)',
+      ...Array(this.monthMap.size - 1).fill('rgba(54, 162, 235, 1')
+    ];
+
+
     new Chart("monthlyReportChart", {
       type: 'bar',  // Change to 'line' for a line chart
       data: {
@@ -81,8 +92,8 @@ export class ReportComponent {
         datasets: [{
           label: 'Monthly Sales (in ₹)',
           data: [...this.monthMap.values()],
-          backgroundColor: 'rgba(54, 162, 235, 0.6)',
-          borderColor: 'rgba(54, 162, 235, 1)',
+          backgroundColor: bgColors,
+          borderColor: borderColors,
           borderWidth: 2
         }]
       },
