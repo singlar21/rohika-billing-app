@@ -19,7 +19,7 @@ username: string = '';
 
   constructor(private authService: AuthService, private router: Router) {
     if(authService.isLoggedIn()){
-      this.router.navigate(['/dashboard']); // redirect if logged In
+      this.router.navigate(['/report']);
     }
 
   }
@@ -27,7 +27,7 @@ username: string = '';
   login() {
     this.authService.login(this.username, this.password).subscribe({
       next: () => {
-        this.router.navigate(['/dashboard']); // redirect after login
+        this.router.navigate(['/report']);
       },
       error: err => {
         this.authService.logout();
