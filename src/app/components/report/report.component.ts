@@ -50,6 +50,9 @@ export class ReportComponent {
         response.forEach((entry: { month: string; totalAmount: number; }) => {
           this.monthMap.set(entry.month, entry.totalAmount);
         });
+        this.monthMap = new Map(
+          [...this.monthMap.entries()].sort((a, b) => b[0].localeCompare(a[0]))
+        );
         this.loadChart();
       },
       error: (error) => {
